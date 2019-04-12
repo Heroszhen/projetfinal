@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createPublication">
+                Créer une publication
+            </button>
+        </div>
+
+        {% for article in user.articles %}
+            <div class="row mb-4">
+                <div class="col-6">
+                    <a href="#">{{ article.auteur.prenom }}</a><br>
+                            <em>{{ article.datePublication | date('d/m/Y') }}</em>
+                </div>
+                <div class="col-6 text-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Modifier</a>
+                            <a class="dropdown-item" href="#">Supprimer</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    {{ article.contenu }}
+                </div>
+                <div class="col-12">
+                    {% if article.image is not null %}3
+                        <img src="{{  asset('images/' ~ article.image) }}" alt="" class="img-fluid">
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="createPublication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
