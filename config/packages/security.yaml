@@ -20,6 +20,7 @@ security:
             form_login:
                 login_path: app_accueil_connexion
                 check_path: app_accueil_connexion
+                default_target_path: app_profil_index
             # http_basic: true
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
             logout:
