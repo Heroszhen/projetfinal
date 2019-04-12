@@ -1,29 +1,73 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Projet Final{% endblock %}
+
 {% block body %}
-    <h1>Inscription</h1>
-    {{ form_start(form) }}
-    <div class="row">
-        <div class="col-md-6">
-    {{ form_row(form.prenom) }}
-        </div>
-        <div class="col-md-6">
-    {{ form_row(form.nom) }}
+
+   {# {% if app.user is null %} #} {# Si l'utilisateur n'est pas connecté #}
+<div class="row">
+    <div class="card m-3 col-md-3">
+        <div class="card-body">
+            <h5 class="card-title">Connexion</h5>
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Mot de passe</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
+                </div>
+                <button type="submit" class="btn btn-primary">Connexion</button>
+            </form>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-    {{ form_row(form.email) }}
-        </div>
-        <div class="col-md-6">
-    {{ form_row(form.date_de_naissance) }}
+
+    <div class="card m-3 col-md-8">
+        <div class="card-body">
+            <h5 class="card-title">Inscription</h5>
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.prenom) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.nom) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_row(form.email) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.date_de_naissance) }}
+                </div>
+            </div>
+            {{ form_row(form.plainPassword) }}
+            <div class="text-right">
+                <button type="submit" class="btn btn-outline-primary">
+                    S'inscrire
+                </button>
+            </div>
+            {{ form_end(form) }}
         </div>
     </div>
-    {{ form_row(form.plainPassword) }}
-    <div class="text-right">
-        <button type="submit" class="btn btn-outline-primary">
-            S'inscrire
-        </button>
-    </div>
-    {{ form_end(form) }}
+</div>
+
+        {# {% else %} #}
+
+
+        <div class="mt-4">
+            <div class="card">
+                <h5 class="card-header">T</h5>
+                <div class="card-body">
+                    <h5 class="card-title">Application</h5>
+                    <p class="card-text">Mystère</p>
+                    <a href="#" class="btn btn-primary">Par ici</a>
+                </div>
+            </div>
+        </div>
+
+   {# {% endif %} #}
+
 {% endblock %}

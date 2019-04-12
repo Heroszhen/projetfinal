@@ -5,38 +5,38 @@
         <title>{% block title %}Projet Final{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('lib/bootstrap/bootstrap.min.css') }}">
-            <link rel="stylesheet" href="/public/style.css">
+            <link rel="stylesheet" href="/public/css/style.css">
         {% endblock %}
     </head>
     <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-info" id="navbar">
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <div class="container">
+            <ul class="navbar-nav">
+                {# {% if app.user is null %} #} {# Si l'utilisateur n'est pas connecté #}
+                <li class="nav-item"><a class="nav-link" href="">Connexion</a></li>
+                <li class="nav-item"><a class="nav-link" href="">Inscription</a></li>
+                {#{% else %} #}
+                <li class="nav-item"><a class="nav-link" href="">Déconnexion</a></li>
+                {# {% endif %} #}
+            </ul>
+
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-warning" id="navbar">
         <div class="container navbar-nav">
             <a class="navbar-brand" href="#">
                 Accueil
             </a>
             <div class="navbar-collapse">
                 <ul class="navbar-nav">
-                   {# {% if app.user is not null %} #}
+                   {# {% if app.user is not null %} #} {# Si l'utilisateur est connecté #}
                     <li class="nav-item">
                         <a class="nav-link" href="">
                             Profil
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                            Amis
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                            Messages
-                        </a>
-                    </li>
-
-
                 </ul>
-
 
             </div>
 
