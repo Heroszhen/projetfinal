@@ -73,8 +73,6 @@ class AccueilController extends AbstractController
         if(!empty($error)){
             dump($error);
             $this->addFlash('error', 'Identifiant incorrects !');
-        }elseif ($request->isMethod('POST')) {
-            return $this->redirectToRoute('app_profil_index');
         }
 
         return $this->render('accueil/connexion.html.twig',
