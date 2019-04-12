@@ -5,12 +5,12 @@
         <title>{% block title %}Projet Final{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('lib/bootstrap/bootstrap.min.css') }}">
-            <link rel="stylesheet" href="/public/css/style.css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% endblock %}
     </head>
     <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary" id="navbar">
         <div class="container">
             <ul class="navbar-nav">
                 {# {% if app.user is null %} #} {# Si l'utilisateur n'est pas connecté #}
@@ -24,7 +24,7 @@
         </div>
     </nav>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-warning" id="navbar">
+    <nav class="navbar navbar-expand-md navbar-dark bg-warning">
         <div class="container navbar-nav">
             <a class="navbar-brand" href="#">
                 Accueil
@@ -36,6 +36,7 @@
                         <a class="nav-link" href="">
                             Profil
                         </a>
+                    </li>
                 </ul>
 
             </div>
