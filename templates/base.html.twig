@@ -2,14 +2,75 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Projet Final{% endblock %}</title>
+
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('lib/bootstrap/bootstrap.min.css') }}">
             <link rel="stylesheet" href="/public/css/style.css">
         {% endblock %}
     </head>
     <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary" id="navbar">
+        <div class="container">
+            <h1 class="text-light">bon.jour <i class="fas fa-mug-hot"></i></h1>
+            <ul class="navbar-nav">
+                {# {% if app.user is null %} #} {# Si l'utilisateur n'est pas connecté #}
+                <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil_connexion') }}">Connexion</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil_inscription') }}">Inscription</a></li>
+                {#{% else %} #}
+                <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil_connexion') }}">Déconnexion</a></li>
+                {# {% endif %} #}
+            </ul>
+
+        </div>
+    </nav>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-warning">
+        <div class="container navbar-nav">
+            <a class="navbar-brand" href="#">
+                Accueil
+            </a>
+            <div class="navbar-collapse">
+                <ul class="navbar-nav">
+                    {# {% if app.user is not null %} #} {# Si l'utilisateur est connecté #}
+                    <li class="nav-item">
+                        <a class="nav-link" href="">
+                            Profil
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Rechercher</button>
+            </form>
+            {# {% endif %} #}
+        </div>
+    </nav>
+
+
+    <div class="container">
+
+        {# Affichage des messages flash #}
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                {# pour la classe alert-danger de bootstrap #}
+                {% if type == 'error' %}
+                    {% set type = 'danger' %}
+                {% endif %}
+                <div class="alert alert-{{ type }} mt-2">
+                    {{ message|raw }}
+                </div>
+
+            {% endfor %}
+
+        {% endfor %}
+
         {% block body %}{% endblock %}
+    </div>
         {% block javascripts %}
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

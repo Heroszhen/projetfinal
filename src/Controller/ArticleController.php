@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use App\Entity\Article;
@@ -13,24 +15,48 @@ use App\Entity\Article;
  *
  * @Route("/article")
  */
+
 class ArticleController extends AbstractController
 {
     /**
      * id de l'utilisateur
      * @Route("/{id}")
      */
-    public function index(User $user)
+    public function index(User $user,Request $request)
     {
-        $repository = $this->getDoctrine()->getRepository(Article::class);
-        //$articles = $repository->findAll(['autor'=>$user],['datePublication'=>'DESC']);
-        dump($user->getArticles());
-        return $this->render('article/index.html.twig', ['user'=>$user]);
+        $article = new Article();
+        $form = $this->createForm(ArticleType::class,$article);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            if($form->isValid()){/*
+                $manager = $this->getDoctrine()->getManager();
+                $article->setAuteur($this->getUser());
+                $article->setDatePublication(new \DateTime());
+                $image=$article->getImage();
+                if(!is_null($image)){
+                    $newimage=uniqid().''.$image->guessExtension();
+                    $article->setImage($newimage);
+                    $image->move($this->getParameter('upload_dir'),$newimage);
+                }
+                $manager->persist($article);
+                $manager->flush();*/
+            }
+        }
+
+        return $this->render('article/index.html.twig',
+            ['user'=>$user,'form'=>$form->createView()]);
     }
 
     /**
-     * @Route("/edit/{id}",defaults={"id":null})
+     * id de l'article
+     * @Route("/delete/{id}")
      */
-    public function editArticle(){
-
+    public function delete(Article $article){
+        $manager = $this->getDoctrine()->getManager();
+        $user=$article->getAuteur();
+        $manager->remove($article);
+        $manager->flush;
+        return $this->redirectToRoute('app_article_index',['id'=>$user->getId()]);
     }
+
 }

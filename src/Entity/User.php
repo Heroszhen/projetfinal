@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -37,6 +38,20 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $motdepasse;
+
+    /**
+     * Mot de passe en clair pour interagir avec le formulaire
+     * d'inscription
+     * @var string
+     *
+     * @Assert\NotBlank(message="Le mot de passe est obligatoire")
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="string", length=25)
+     */
+    private $role = 'ROLE_USER';
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -257,4 +272,43 @@ class User
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param string $plainPassword
+     * @return User
+     */
+    public function setPlainPassword(string $plainPassword): User
+    {
+        $this->plainPassword = $plainPassword;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     * @return User
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+        return $this;
+    }
+
+
+
 }
