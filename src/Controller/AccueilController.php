@@ -48,7 +48,7 @@ class AccueilController extends AbstractController
 
                 $this->addFlash('success','Votre compte a été créé avec succés !');
 
-                return $this->redirectToRoute('app_acceuil_inscription');
+                return $this->redirectToRoute('app_accueil_connexion');
             }else{
                 $this->addFlash('error', 'Le formulaire contient des erreurs !');
             }
@@ -74,7 +74,7 @@ class AccueilController extends AbstractController
             dump($error);
             $this->addFlash('error', 'Identifiant incorrects !');
         }elseif ($request->isMethod('POST')) {
-            //return $this->redirectToRoute('app_profil_index');
+            return $this->redirectToRoute('app_profil_index');
         }
 
         return $this->render('accueil/connexion.html.twig',

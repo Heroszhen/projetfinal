@@ -5,23 +5,28 @@
 {% block body %}
 
    {# {% if app.user is null %} #} {# Si l'utilisateur n'est pas connecté #}
-<div class="row">
+{#<div class="row">
     <div class="card m-3 col-md-3">
         <div class="card-body">
             <h5 class="card-title">Connexion</h5>
-            <form>
+            <form method="post">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                    <label>Email</label>
+                    <input type="text" name="_username" class="form-control"
+                           value="{{ Prenom }}">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Mot de passe</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
+                    <label>Mot de passe</label>
+                    <input type="password" name="_password" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-primary">Connexion</button>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-outline-primary">
+                        Se connecter
+                    </button>
+                </div>
             </form>
         </div>
-    </div>
+    </div>#}
 
     <div class="card m-3 col-md-8">
         <div class="card-body">
