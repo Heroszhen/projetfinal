@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Message;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -47,4 +48,27 @@ class MessageRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function search(User $user1, User $user2)
+    {
+        // constructeur de requete sql
+        // le 'a' est l'alias de la table article dans la requete
+        $qb = $this->createQueryBuilder('m');
+
+        // tri par date de publication croissante
+        $qb->orderBy('m.publicationDate', 'ASC');
+
+        $qb
+            ->orWhere('m.auteur :user1')
+            ->orWhere('m.auteur :user2')
+            ->orWhere('m.destinataire :user1')
+            ->orWhere('m.destinataire :user2')
+            ->setParameter('user1', $user1)
+            ->setParameter('user2', $user2)
+        ;
+        // la requqete est generee
+        $query = $qb->getQuery();
+
+        // on retourne le resultat de la requete
+        return $query->getResult();
+    }
 }

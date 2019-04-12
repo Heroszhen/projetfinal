@@ -83,11 +83,17 @@ class User
      */
     private $messages;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="destinataire")
+     */
+    private $messagesRecus;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->messages = new ArrayCollection();
+        $this->messagesRecus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -308,6 +314,40 @@ class User
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->prenom . ' ' . $this->nom;
+    }
 
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessagesRecus(): Collection
+    {
+        return $this->messagesRecus;
+    }
+
+    public function addMessagesRecus(Message $messagesRecus): self
+    {
+        if (!$this->messagesRecus->contains($messagesRecus)) {
+            $this->messagesRecus[] = $messagesRecus;
+            $messagesRecus->setDestinataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesRecus(Message $messagesRecus): self
+    {
+        if ($this->messagesRecus->contains($messagesRecus)) {
+            $this->messagesRecus->removeElement($messagesRecus);
+            // set the owning side to null (unless already changed)
+            if ($messagesRecus->getDestinataire() === $this) {
+                $messagesRecus->setDestinataire(null);
+            }
+        }
+
+        return $this;
+    }
 
 }

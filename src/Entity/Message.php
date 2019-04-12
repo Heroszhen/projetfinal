@@ -32,6 +32,12 @@ class Message
      */
     private $datePublication;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="messagesRecus")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $destinataire;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class Message
     public function setDatePublication(\DateTimeInterface $datePublication): self
     {
         $this->datePublication = $datePublication;
+
+        return $this;
+    }
+
+    public function getDestinataire(): ?User
+    {
+        return $this->destinataire;
+    }
+
+    public function setDestinataire(?User $destinataire): self
+    {
+        $this->destinataire = $destinataire;
 
         return $this;
     }
