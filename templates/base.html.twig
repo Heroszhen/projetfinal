@@ -13,12 +13,13 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-primary" id="navbar">
         <div class="container">
             <ul class="navbar-nav">
-                {# {% if app.user is null %} #} {# Si l'utilisateur n'est pas connecté #}
+
+                {% if app.user is null %}  {# Si l'utilisateur n'est pas connecté #}
                 <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil_connexion') }}">Connexion</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil_inscription') }}">Inscription</a></li>
-                {#{% else %} #}
-                <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil_connexion') }}">Déconnexion</a></li>
-                {# {% endif %} #}
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil_logout') }}">Déconnexion</a></li>
+                {% endif %}
             </ul>
 
         </div>
