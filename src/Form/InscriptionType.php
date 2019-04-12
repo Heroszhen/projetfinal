@@ -22,7 +22,7 @@ class InscriptionType extends AbstractType
             ->add('prenom',
                     TextType::class,
                 [
-                    'label' => 'Prenom'
+                    'label' => 'Prénom'
                 ]
                 )
             ->add('nom',
