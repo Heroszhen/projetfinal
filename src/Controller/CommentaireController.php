@@ -18,9 +18,9 @@ class CommentaireController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Commentaire::class);
         // eq de findall() mais avec un tri sur le nom
-        $commentaires = $repository->findBy(['article' => $article], ['publicationDate' => 'DESC']);
+        $commentaires = $repository->findBy(['article' => $article], ['datePublication' => 'DESC']);
 
-        return $this->render('admin/comment/inscription.html.twig',
+        return $this->render('article/index.html.twig',
             [
                 'commentaires' => $commentaires,
                 'article' => $article
@@ -101,7 +101,7 @@ class CommentaireController extends AbstractController
             [
                 'id' => $id
             ]);
-        return $this->redirectToRoute('app_article_index');
+        return $this->redirectToRoute('app_article_index', ['id' => $commentaire->getArticle()->getId()]);
     }
 
 }

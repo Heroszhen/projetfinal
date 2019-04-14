@@ -67,7 +67,7 @@
                 <p>{{ commentaire.contenu|nl2br }}</p>
             </div>
         </div>
-
+        {% if commentaire.auteur == app.user %}
             <div class="text-right">
                 <a href="{{ path('app_commentaire_modifiercommentaire', {'id': commentaire.id}) }}"
                    class="mr-3">
@@ -75,12 +75,13 @@
                 </a>
 
 
-                <a href="{{ path('app_commentaire_index', {'id': article.id}) }}"
+                <a href="{{ path('app_commentaire_supprimercommentaire', {'id': commentaire.id}) }}"
                    class="btn-delete">
                     <i class="fas fa-trash"></i>
                 </a>
 
             </div>
+        {% endif %}
 
     {% endfor %}
 
