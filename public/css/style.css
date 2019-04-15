@@ -1,7 +1,11 @@
-body {
-    background-image: url(../img/wallpaper.jpg);
+body{
+    background-image: url("/images/socialnetwork.png");
     background-repeat: repeat;
+    background-attachment: fixed;
+}
 
+.transparence{
+    background: rgba(255, 255, 255, 0.7);
 }
 
 #navbar{
@@ -10,7 +14,7 @@ body {
 
 .imgprofil{
     width: 200px;
-    height: 250px;
+    height: 200px;
     -webkit-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
     box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
