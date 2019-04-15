@@ -85,9 +85,9 @@
                     </div>
 
                     {% for article in user.articles %}
-                        <div class="row mb-4" id="article{{ article.id }}">
+                        <div class="row mb-4 border pt-2" id="article{{ article.id }}">
                             <div class="col-6">
-                                <a href="#">{{ article.auteur.prenom }}</a><br>
+                                <a href="{{ path("app_profil_index",{'id':article.auteur.id}) }}">{{ article.auteur.prenom }}</a><br>
                                 <em>{{ article.datePublication | date('d/m/Y') }}</em>
                             </div>
                             {% if app.user == user %}
@@ -102,35 +102,37 @@
                                 </div>
                             </div>
                             {% endif %}
-                            <div class="col-12 contenu">
+                            <div class="col-12 contenu pb-3">
                                 {{ article.contenu }}
                             </div>
-                            <div class="col-12 image">
+                            <div class="col-12 image pb-3">
                                 {% if article.image is not null %}
-                                    <img src="{{  asset('images/' ~ article.image) }}" alt="" class="img-fluid" width="100">
+                                    <img src="{{  asset('images/' ~ article.image) }}" alt="" class="img-fluid" width="200">
                                 {% endif %}
+                            </div>
+
+                            <div class="commentaires col-12 border-top pt-2 pb-2">
+                                <div class="commenter">
+                                    <small>Commenter :</small>
+                                    <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
+                                        <input type="text" name="commentaire">
+                                        <input type="hidden">
+                                        <button type="submit" class="btn btn-warning">Publier</button>
+                                    </form>
+                                </div>
+                                {% for comment in article.commentaires %}
+                                    <div id="touscommentaires">
+                                        <div>
+                                            <small>À {{ comment.datePublication|date('H:i d/m/Y') }}</small><br>
+                                            <div class="vignette"><img src="" alt=""></div>
+                                            <strong><a href="{{ path("app_profil_index",{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a></strong> a écrit : {{ comment.contenu }}<br>
+                                        </div><br>
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
                     {% endfor %}
                 </div>
-
-                <div>
-                    <ul class="mt-5 list-group">
-                        <li class="list-group-item m-2"><small>À 12:34 le 28/12:1990</small><br>
-                            <strong>Prénom Nom</strong> a écrit : Message
-                            <br>
-                            <small>Commenter</small>
-                            <form action="">
-                                <input type="text">
-                            </form>
-                        </li>
-                        <li class="list-group-item m-2"><small>À 12:34 le 28/12:1990</small><br>
-                            <strong>Prénom Nom</strong> a écrit : dsgshdshrdjdr
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
         </div>
 
 
@@ -151,7 +153,7 @@
                         {{ form_start(formp) }}
                         {{ form_row(formp.contenu) }}
                         {{ form_row(formp.image) }}
-                        <button type="submit" class="btn btn-primary">Créer</button>
+                        <button type="submit" class="btn btn-primary">Publier</button>
                         {{ form_end(formp) }}
                     </div>
                 </div>
