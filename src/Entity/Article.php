@@ -30,7 +30,7 @@ class Article
     private $datePublication;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
 
@@ -41,7 +41,7 @@ class Article
     private $auteur;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="article",cascade={"remove"})
      */
     private $commentaires;
 
@@ -107,12 +107,12 @@ class Article
     /**
      * @return Collection|Commentaire[]
      */
-    public function getCommentaires(): Collection
+    public function getCommentaires(): ?Collection
     {
         return $this->commentaires;
     }
 
-    public function addCommentaire(Commentaire $commentaire): self
+    public function addCommentaire(?Commentaire $commentaire): self
     {
         if (!$this->commentaires->contains($commentaire)) {
             $this->commentaires[] = $commentaire;

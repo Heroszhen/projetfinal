@@ -1,9 +1,16 @@
+body {
+    background-image: url(/img/wallpaper.jpg);
+    background-repeat: repeat;
+
+}
+
 #navbar{
     background-color: #004683 !important;
 }
 h1.grostitre{
     font-family: "Arial Black";
 }
+
 
 .imgprofil{
     width: 200px;
