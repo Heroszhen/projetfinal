@@ -1,5 +1,5 @@
 body {
-    background-image: url(/img/wallpaper.jpg);
+    background-image: url(../img/wallpaper.jpg);
     background-repeat: repeat;
 
 }
@@ -7,10 +7,6 @@ body {
 #navbar{
     background-color: #004683 !important;
 }
-h1.grostitre{
-    font-family: "Arial Black";
-}
-
 
 .imgprofil{
     width: 200px;
@@ -38,14 +34,21 @@ h1.grostitre{
 }
 
 .photos{
-    width: 200px;
-    height: 200px;
+    max-width: 200px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-album{
+    max-width: 200px;
     -webkit-box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
     box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
 }
 
-.photos:hover{
+.img-album:hover{
     -webkit-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
     box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);

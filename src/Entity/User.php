@@ -88,26 +88,25 @@ class User implements UserInterface
     private $messages;
 
     /**
-<<<<<<< HEAD
      * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="user")
      */
     private $photos;
-=======
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Amis", mappedBy="suiveur")
      */
     private $amis;
->>>>>>> master
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->messages = new ArrayCollection();
-<<<<<<< HEAD
+
         $this->photos = new ArrayCollection();
-=======
+
         $this->amis = new ArrayCollection();
->>>>>>> master
+
     }
 
     public function getId(): ?int
@@ -401,7 +400,6 @@ class User implements UserInterface
     }
 
     /**
-<<<<<<< HEAD
      * @return Collection|Photo[]
      */
     public function getPhotos(): Collection
@@ -414,7 +412,9 @@ class User implements UserInterface
         if (!$this->photos->contains($photo)) {
             $this->photos[] = $photo;
             $photo->setUser($this);
-=======
+        }
+    }
+    /**
      * @return Collection|Amis[]
      */
     public function getAmis(): Collection
@@ -427,13 +427,12 @@ class User implements UserInterface
         if (!$this->amis->contains($ami)) {
             $this->amis[] = $ami;
             $ami->setSuiveur($this);
->>>>>>> master
+
         }
 
         return $this;
     }
 
-<<<<<<< HEAD
     public function removePhoto(Photo $photo): self
     {
         if ($this->photos->contains($photo)) {
@@ -441,7 +440,10 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($photo->getUser() === $this) {
                 $photo->setUser(null);
-=======
+            }
+        }
+    }
+
     public function removeAmi(Amis $ami): self
     {
         if ($this->amis->contains($ami)) {
@@ -449,7 +451,7 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($ami->getSuiveur() === $this) {
                 $ami->setSuiveur(null);
->>>>>>> master
+
             }
         }
 
