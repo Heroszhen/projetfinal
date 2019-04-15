@@ -69,10 +69,6 @@ class ProfilController extends AbstractController
             }
         }
 
-
-
-
-
         return $this->render('profil/index.html.twig', ['user'=>$user,'formp'=>$form->createView()]);
     }
 
@@ -93,4 +89,6 @@ class ProfilController extends AbstractController
         //return $this->redirectToRoute('app_article_index',['id'=>$user->getId()]);
         return new Response("ok");
     }
+
+
 }
