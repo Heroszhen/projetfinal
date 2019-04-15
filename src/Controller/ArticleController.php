@@ -2,8 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Commentaire;
-use App\Form\CommentaireType;
+use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,71 +15,53 @@ use App\Entity\Article;
  *
  * @Route("/article")
  */
+
 class ArticleController extends AbstractController
 {
     /**
      * id de l'utilisateur
      * @Route("/{id}")
      */
-    public function index(User $user, Request $request, Article $article)
+    public function index(User $user,Request $request)
     {
-        //les commentaires
-        $em = $this->getDoctrine()->getManager();
-        $commentaire = new Commentaire();
-
-        //creation du formulaire relie au commantaire
-        $form = $this->createForm(CommentaireType::class, $commentaire);
-
-        // le formulaire analyse la requete
-        //et fait le mapping avec l'entite s'il a ete soumis
+        $article = new Article();
+        $form = $this->createForm(ArticleType::class,$article);
         $form->handleRequest($request);
-
-        dump($article);
-
-        //si le formulaire a ete soumis
         if($form->isSubmitted()){
-            //si les validations a partir des annotations dans
-            // l'entite category sont ok
-            if($form->isValid()) {
-                $commentaire->setAuteur($this->getUser());
-                $commentaire->setDatePublication(new\DateTime());
-                $commentaire->setArticle($article);
-
-                //enregistrement da la categorie en bdd
-                $em->persist($commentaire);
-                $em->flush();
-
-                $this->addFlash('success', 'le commentaire est enregistre');
-
-                //return $this->redirectToRoute('app_article_index', [
-                //    'id' => $article->getId()
-                // ]); EQUI de
-
-                return $this->redirectToRoute(
-                    $request->get('_route'),
-                    [
-                        'id' => $article->getId()
-                    ]
-                );
+            if($form->isValid()){
+                $manager = $this->getDoctrine()->getManager();
+                $article->setAuteur($this->getUser());
+                $article->setDatePublication(new \DateTime());
+                $image=$article->getImage();
+                if(!is_null($image)){
+                    $newimage=uniqid().''.$image->guessExtension();
+                    $article->setImage($newimage);
+                    $image->move($this->getParameter('upload_dir'),$newimage);
+                }
+                $manager->persist($article);
+                $manager->flush();
             }
         }
-        $repository = $this->getDoctrine()->getRepository(Commentaire::class);
-        // eq de findall() mais avec un tri sur le nom
-        $commentaires = $repository->findBy(['article' => $article], ['datePublication' => 'DESC']);
 
         return $this->render('article/index.html.twig',
-            [
-                'user'=>$user,
-                'form' => $form->createView(),
-                'article' => $article,
-                'commentaires' => $commentaires
-            ]);
+            ['user'=>$user,'form'=>$form->createView()]);
     }
 
     /**
-     * @Route("/edit/{id}",defaults={"id":null})
+     * id de l'article
+     * @Route("/delete/{id}")
      */
-    public function editArticle(){
+    public function delete(Article $article){
+        $manager = $this->getDoctrine()->getManager();
 
+        if(!is_null($article->getImage())){
+            unlink($this->getParameter('upload_dir').$article->getImage());
+        }
+
+        $user=$article->getAuteur();
+        $manager->remove($article);
+        $manager->flush();
+        return $this->redirectToRoute('app_article_index',['id'=>$user->getId()]);
     }
+
 }
