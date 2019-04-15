@@ -50,7 +50,7 @@ class ArticleController extends AbstractController
                 $em->persist($commentaire);
                 $em->flush();
 
-                $this->addFlash('success', 'le commentaire est enregistre');
+                $this->addFlash('success', 'le commentaire est enregistré');
 
                 //return $this->redirectToRoute('app_article_index', [
                 //    'id' => $article->getId()

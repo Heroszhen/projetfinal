@@ -70,7 +70,7 @@ class CommentaireController extends AbstractController
                 $em->persist($commentaire);
                 $em->flush();
 
-                $this->addFlash('success', 'le commentaire est enregistre');
+                $this->addFlash('success', 'le commentaire est enregistré');
                 return$this->redirectToRoute('app_article_index', ['id' => $commentaire->getArticle()->getId()]);
             }else{
                 $this->addFlash('error', 'Le formulaire contient des erreurs');
@@ -97,7 +97,7 @@ class CommentaireController extends AbstractController
         $em->remove($commentaire);
         $em->flush();
 
-        $this->addFlash('success', 'le commentaire est supprimée',
+        $this->addFlash('success', 'le commentaire est supprimé',
             [
                 'id' => $id
             ]);
