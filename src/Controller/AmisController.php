@@ -24,7 +24,7 @@ class AmisController extends AbstractController
 
         return $this->render('amis/index.html.twig',
                 [
-                    'amis' => $user0
+                    'amis' => $user
                 ]
             );
     }
