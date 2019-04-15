@@ -54,7 +54,7 @@ class AccueilController extends AbstractController
                 $em->persist($user);
                 $em->flush();
 
-                $this->addFlash('success','Votre compte a été créé avec succés !');
+                $this->addFlash('success','Votre compte a été créé avec succès !');
 
                 return $this->redirectToRoute('app_accueil_connexion');
             }else{
