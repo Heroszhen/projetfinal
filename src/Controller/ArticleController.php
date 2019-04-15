@@ -28,7 +28,7 @@ class ArticleController extends AbstractController
         $form = $this->createForm(ArticleType::class,$article);
         $form->handleRequest($request);
         if($form->isSubmitted()){
-            if($form->isValid()){/*
+            if($form->isValid()){
                 $manager = $this->getDoctrine()->getManager();
                 $article->setAuteur($this->getUser());
                 $article->setDatePublication(new \DateTime());
@@ -39,7 +39,7 @@ class ArticleController extends AbstractController
                     $image->move($this->getParameter('upload_dir'),$newimage);
                 }
                 $manager->persist($article);
-                $manager->flush();*/
+                $manager->flush();
             }
         }
 
@@ -53,9 +53,14 @@ class ArticleController extends AbstractController
      */
     public function delete(Article $article){
         $manager = $this->getDoctrine()->getManager();
+
+        if(!is_null($article->getImage())){
+            unlink($this->getParameter('upload_dir').$article->getImage());
+        }
+
         $user=$article->getAuteur();
         $manager->remove($article);
-        $manager->flush;
+        $manager->flush();
         return $this->redirectToRoute('app_article_index',['id'=>$user->getId()]);
     }
 
