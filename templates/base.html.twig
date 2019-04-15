@@ -17,11 +17,10 @@
         <div class="container">
             <h1 class="text-light">bon.jour <i class="fas fa-mug-hot"></i></h1>
             <ul class="navbar-nav">
-<<<<<<< HEAD
+
                 {% if app.user is null %} {#Si l'utilisateur n'est pas connecté#}
-=======
-                {% if app.user is null %}  {# Si l'utilisateur n'est pas connecté #}
->>>>>>> master
+
+
                 <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil_connexion') }}">Connexion</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ path('app_accueil_inscription') }}">Inscription</a></li>
                 {% else %}
@@ -39,11 +38,10 @@
             </a>
             <div class="navbar-collapse">
                 <ul class="navbar-nav">
-<<<<<<< HEAD
+
                     {% if app.user is not null %} {# Si l'utilisateur est connecté #}
-=======
-                    {% if app.user is not null %}  {# Si l'utilisateur est connecté #}
->>>>>>> master
+
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_profil_index',{'id':app.user.id}) }}">
                             Profil
@@ -57,11 +55,9 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
                 <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Rechercher</button>
             </form>
-<<<<<<< HEAD
-            {% endif %}
-=======
+
+
            {% endif %}
->>>>>>> master
         </div>
     </nav>
 
