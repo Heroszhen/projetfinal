@@ -2,4 +2,58 @@
 
 {% block body %}
 
+
+    {# LES photos #}
+
+    {% if app.user is not null %}
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-4">
+                {{ form_row(form.image) }}
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-info">Envoyer</button>
+        </div>
+        {{ form_end(form) }}
+    {% endif %}
+
+
+    {#liser les photos#}
+
+    <h3><em>Les photos({{ photos|length }})</em></h3>
+
+    {% for photo in photos  %}
+
+        <div class="row">
+            <div class="col-4">
+                <img src="{{ photo.image }}">
+            </div>
+        </div>
+
+
+
+
+{#
+        {% if commentaire.auteur == app.user %}
+            <div class="text-right">
+                <a href="{{ path('app_commentaire_modifiercommentaire', {'id': commentaire.id}) }}"
+                   class="mr-3">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+
+
+                <a href="{{ path('app_commentaire_supprimercommentaire', {'id': commentaire.id}) }}"
+                   class="btn-delete">
+                    <i class="fas fa-trash"></i>
+                </a>
+
+            </div>
+        {% endif %} #}
+
+    {% endfor %}
+
+
+
 {% endblock %}
