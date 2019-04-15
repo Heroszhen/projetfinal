@@ -42,6 +42,7 @@ class Article
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="article",cascade={"remove"})
+     * @ORM\OrderBy({"datePublication":"DESC"})
      */
     private $commentaires;
 

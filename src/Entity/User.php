@@ -97,6 +97,7 @@ class User implements UserInterface
      */
     private $amis;
 
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -432,6 +433,7 @@ class User implements UserInterface
 
         return $this;
     }
+
 
     public function removePhoto(Photo $photo): self
     {

@@ -19,9 +19,20 @@ class AccueilController extends AbstractController
     /**
      * @Route("/")
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->render('accueil/index.html.twig');
+        $user = new User();
+
+        $form = $this->createForm(InscriptionType::class, $user);
+
+        $form->handleRequest($request);
+
+
+        return $this->render('accueil/index.html.twig',
+                [
+                    'form' => $form->createView()
+                ]
+            );
     }
 
     /**

@@ -1,7 +1,6 @@
 var tweet = $("#tweet-content"); //La zone de texte
 var compteur = $("#counter em"); //Le compteur numérique
 
-
 function counting() {
     tweet.val().length; //Calcule la longueur de la chaine de caractères
 
@@ -70,5 +69,22 @@ $('.update-article').click(function(){
 	if(src){
 		$("form[name='article']").append("<br><br><img src='"+src+"' width='200'>");
 	}*/
+});
+
+$('.formcommentaire').each(function(){
+    $(this).submit(function(e) {
+        e.preventDefault();
+        var action = $(this).attr("action");
+        console.log(action);
+        var form = $(this);
+        $.post(
+            action,
+            $(this).serialize(),
+            function(response){
+               form.parent().parent().find("#touscommentaires").prepend(response);
+            },
+
+        );
+    });
 });
 
