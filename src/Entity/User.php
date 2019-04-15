@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"}, message="il exsiste deja un utilisateur avec cet email")
  */
 class User implements UserInterface
 {
@@ -119,6 +121,12 @@ class User implements UserInterface
         $this->nom = $nom;
 
         return $this;
+    }
+
+
+    public function __toString()
+    {
+        return $this->prenom . ' ' . $this->nom;
     }
 
     public function getEmail(): ?string

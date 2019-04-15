@@ -17,14 +17,16 @@ class ArticleType extends AbstractType
             ->add('contenu',
                 TextareaType::class,
                 [
-                    'label' => 'Contenu'
+                    'label' => 'Contenu',
+                    'data_class' => null
                 ]
                 )
             ->add('image',
                 FileType::class,
                 [
                     'label'=>'Image',
-                    'required' => false
+                    'required' => false,
+                    'data_class' => null
                 ]
                 )
         ;

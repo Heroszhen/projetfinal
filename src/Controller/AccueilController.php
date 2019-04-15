@@ -12,10 +12,18 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
 /**
- * @Route("/accueil")
+ * @Route("/")
  */
 class AccueilController extends AbstractController
 {
+    /**
+     * @Route("/")
+     */
+    public function index()
+    {
+        return $this->render('accueil/index.html.twig');
+    }
+
     /**
      * @Route("/inscription")
      */
@@ -55,7 +63,7 @@ class AccueilController extends AbstractController
         }
 
 
-        return $this->render('accueil/index.html.twig',
+        return $this->render('accueil/inscription.html.twig',
             [
                 'form' => $form->createView()
             ]
