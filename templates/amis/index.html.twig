@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma liste d'amis{% endblock %}
+
+{% block body %}
+
+    <h1 class="mt-2">Liste d'amis de Prénom Nom</h1>
+
+    <table class="table table-striped mt-5">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Nom</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><img src="" alt=""><i class="far fa-smile"></i></td>
+            <td>Prénom 1</td>
+            <td>Nom 1</td>
+        </tr>
+        <tr>
+            <td><img src="" alt=""><i class="far fa-smile"></i></td>
+            <td>Prénom 2</td>
+            <td>Nom 2</td>
+        </tr>
+        <tr>
+            <td><img src="" alt=""><i class="far fa-smile"></i></td>
+            <td>Prénom 3</td>
+            <td>Nom 3</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+{% endblock %}

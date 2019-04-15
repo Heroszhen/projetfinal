@@ -75,18 +75,44 @@
 
             </div>
 
-
+            {#les publications(articles)#}
             <div class="mt-5">
-                <h3>Publier sur le profil</h3>
-                <form>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Sagemé sur le filpro</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <div class="container" id="articles">
+                    <div class="row">
+                        <button type="button" class="btn btn-link publier" data-toggle="modal" data-target="#createPublication">
+                            Créer une publication
+                        </button>
                     </div>
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Balancer</button>
-                    </div>
-                </form>
+
+                    {% for article in user.articles %}
+                        <div class="row mb-4" id="article{{ article.id }}">
+                            <div class="col-6">
+                                <a href="#">{{ article.auteur.prenom }}</a><br>
+                                <em>{{ article.datePublication | date('d/m/Y') }}</em>
+                            </div>
+                            {% if app.user == user %}
+                            <div class="col-6 text-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item update-article" data-toggle="modal" data-target="#createPublication" data-article="{{ article.id }}" href="#">Modifier</a>
+                                        <a class="dropdown-item delete-article" data-article="article{{ article.id }}" href="{{ path('app_profil_delete',{'id':article.id}) }}">Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="col-12 contenu">
+                                {{ article.contenu }}
+                            </div>
+                            <div class="col-12 image">
+                                {% if article.image is not null %}
+                                    <img src="{{  asset('images/' ~ article.image) }}" alt="" class="img-fluid" width="100">
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
 
                 <div>
                     <ul class="mt-5 list-group">
@@ -103,13 +129,38 @@
                         </li>
                     </ul>
                 </div>
-
-
             </div>
+
         </div>
 
 
 </div>
 
+    <!-- Modal pour les publications(articles)-->
+    <div class="modal fade" id="createPublication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Créer une publication</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        {{ form_start(formp) }}
+                        {{ form_row(formp.contenu) }}
+                        {{ form_row(formp.image) }}
+                        <button type="submit" class="btn btn-primary">Créer</button>
+                        {{ form_end(formp) }}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
