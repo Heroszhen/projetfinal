@@ -2,22 +2,30 @@
 
 namespace App\Controller;
 
+use App\Entity\Amis;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/")
+ * @Route("/amis")
  */
 class AmisController extends AbstractController
 {
     /**
-     * @Route("/amis")
+     * @Route("/{id}")
      */
-    public function index()
+    public function index(User $user)
     {
-        return $this->render('amis/index.html.twig', [
-            'controller_name' => 'AmisController',
-        ]);
+        $repository = $this->getDoctrine()->getRepository(Amis::class);
+        $listeAmis= $repository->findBy(['user'=>$user], ['prenom'=> 'desc']);
+
+
+        return $this->render('amis/index.html.twig',
+                [
+                    'amis' => $user0
+                ]
+            );
     }
 }

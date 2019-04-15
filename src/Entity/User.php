@@ -88,11 +88,17 @@ class User implements UserInterface
      */
     private $messages;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Amis", mappedBy="suiveur")
+     */
+    private $amis;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->messages = new ArrayCollection();
+        $this->amis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -383,5 +389,36 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @return Collection|Amis[]
+     */
+    public function getAmis(): Collection
+    {
+        return $this->amis;
+    }
+
+    public function addAmi(Amis $ami): self
+    {
+        if (!$this->amis->contains($ami)) {
+            $this->amis[] = $ami;
+            $ami->setSuiveur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAmi(Amis $ami): self
+    {
+        if ($this->amis->contains($ami)) {
+            $this->amis->removeElement($ami);
+            // set the owning side to null (unless already changed)
+            if ($ami->getSuiveur() === $this) {
+                $ami->setSuiveur(null);
+            }
+        }
+
+        return $this;
     }
 }
