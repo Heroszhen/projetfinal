@@ -87,11 +87,27 @@ class User implements UserInterface
      */
     private $messages;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="user")
+     */
+    private $photos;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Amis", mappedBy="suiveur")
+     */
+    private $amis;
+
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->messages = new ArrayCollection();
+
+        $this->photos = new ArrayCollection();
+
+        $this->amis = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -382,5 +398,65 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @return Collection|Photo[]
+     */
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    public function addPhoto(Photo $photo): self
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos[] = $photo;
+            $photo->setUser($this);
+        }
+    }
+    /**
+     * @return Collection|Amis[]
+     */
+    public function getAmis(): Collection
+    {
+        return $this->amis;
+    }
+
+    public function addAmi(Amis $ami): self
+    {
+        if (!$this->amis->contains($ami)) {
+            $this->amis[] = $ami;
+            $ami->setSuiveur($this);
+
+        }
+
+        return $this;
+    }
+
+
+    public function removePhoto(Photo $photo): self
+    {
+        if ($this->photos->contains($photo)) {
+            $this->photos->removeElement($photo);
+            // set the owning side to null (unless already changed)
+            if ($photo->getUser() === $this) {
+                $photo->setUser(null);
+            }
+        }
+    }
+
+    public function removeAmi(Amis $ami): self
+    {
+        if ($this->amis->contains($ami)) {
+            $this->amis->removeElement($ami);
+            // set the owning side to null (unless already changed)
+            if ($ami->getSuiveur() === $this) {
+                $ami->setSuiveur(null);
+
+            }
+        }
+
+        return $this;
     }
 }

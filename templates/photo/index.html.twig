@@ -2,4 +2,67 @@
 
 {% block body %}
 
+    {# LES photos #}
+
+
+
+    <h2 class="mt-3">Album photo</h2>
+
+    {% if app.user is not null %}
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-4">
+                {{ form_row(form.image) }}
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-info">Publier</button>
+        </div>
+        {{ form_end(form) }}
+    {% endif %}
+
+
+
+{# Les images viendront s'afficher ici les unes à la suite des autres. De la plus récente à la plus ancienne #}
+
+    <h3><em>Les photos({{ photos|length }})</em></h3>
+    <div class="row justify-content-start mt-5">
+
+        {% for photo in photos  %}
+        <div class="photos m-2">
+            <img src="{{ asset('images/' ~ photo.image) }}" alt="..." class="img-album">
+        </div>
+
+        {% endfor %}
+
+        {#
+        <div class="photos m-2"><img src="..." alt="..." class="img-thumbnail"></div>
+        <div class="photos m-2"><img src="..." alt="..." class="img-thumbnail"></div>
+        <div class="photos m-2"><img src="..." alt="..." class="img-thumbnail"></div>
+        <div class="photos m-2"><img src="..." alt="..." class="img-thumbnail"></div>
+        <div class="photos m-2"><img src="..." alt="..." class="img-thumbnail"></div>
+#}
+    </div>
+
+    {# suppression
+            {% if commentaire.auteur == app.user %}
+                <div class="text-right">
+                    <a href="{{ path('app_commentaire_modifiercommentaire', {'id': commentaire.id}) }}"
+                       class="mr-3">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+
+
+                    <a href="{{ path('app_commentaire_supprimercommentaire', {'id': commentaire.id}) }}"
+                       class="btn-delete">
+                        <i class="fas fa-trash"></i>
+                    </a>
+
+                </div>
+            {% endif %} #}
+
+
+
+
 {% endblock %}
