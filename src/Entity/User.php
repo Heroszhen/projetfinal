@@ -11,9 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- *
- *@UniqueEntity(fields={"email"}, message="cet email est déjà utilisé")
- *
+ * @UniqueEntity(fields={"email"}, message="il exsiste deja un utilisateur avec cet email")
  */
 class User implements UserInterface
 {
@@ -75,6 +73,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="auteur")
+     * @ORM\OrderBy({"datePublication":"DESC"})
      */
     private $articles;
 
