@@ -90,8 +90,10 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="user")
      */
+    private $photos;
 
-     /** @ORM\OneToMany(targetEntity="App\Entity\Amis", mappedBy="suiveur")
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Amis", mappedBy="suiveur")
      */
     private $amis;
 
@@ -413,8 +415,8 @@ class User implements UserInterface
             $photo->setUser($this);
         }
     }
-
-     /** @return Collection|Amis[]
+    /**
+     * @return Collection|Amis[]
      */
     public function getAmis(): Collection
     {
