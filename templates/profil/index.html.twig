@@ -42,23 +42,16 @@
 
             <div class="mt-5">
                 <h5>
-                    <a href="">Album photo</a>
+                    {# album photo #}
+                    <a href="{{ path('app_photo_index') }}">Album photo</a>
                 </h5>
                 <div class="row justify-content-start">
                     <div class="col-12">
-                        <div class="vignette m-1"></div>
-                        <div class="vignette m-1"></div>
-                        <div class="vignette m-1"></div>
-                    </div>
-                    <div class="col-12">
-                        <div class="vignette m-1"></div>
-                        <div class="vignette m-1"></div>
-                        <div class="vignette m-1"></div>
-                    </div>
-                    <div class="col-12">
-                        <div class="vignette m-1"></div>
-                        <div class="vignette m-1"></div>
-                        <div class="vignette m-1"></div>
+                        {% for photo in user.photos  %}
+                        <div class="vignette m-1">
+                            <img src="{{ asset('images/' ~ photo.image) }}" alt="..." width="100%">
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
