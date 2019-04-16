@@ -162,7 +162,7 @@
                                             <small>À {{ comment.datePublication|date('H:i d/m/Y') }}</small><br>
                                             <div class="vignette">
                                                 {% if comment.auteur.photo is null %}
-                                                    <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50">
+                                                    <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50" height="50">
                                                 {% else %}
                                                     <img src="{{ asset('images/' ~ comment.auteur.photo) }}" alt="" width="50">
                                                 {% endif %}
@@ -176,7 +176,7 @@
                         </div>
                     {% endfor %}
                 </div>
-        </div>f
+        </div>
 
 </div>
 
