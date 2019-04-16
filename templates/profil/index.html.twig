@@ -121,15 +121,17 @@
                                         <button type="submit" class="btn btn-warning">Publier</button>
                                     </form>
                                 </div>
-                                {% for comment in article.commentaires %}
+
                                     <div id="touscommentaires">
+                                        {% for comment in article.commentaires %}
                                         <div>
                                             <small>À {{ comment.datePublication|date('H:i d/m/Y') }}</small><br>
                                             <div class="vignette"><img src="" alt=""></div>
                                             <strong><a href="{{ path("app_profil_index",{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a></strong> a écrit : {{ comment.contenu }}<br>
                                         </div><br>
+                                        {% endfor %}
                                     </div>
-                                {% endfor %}
+
                             </div>
                         </div>
                     {% endfor %}
