@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Photo;
 use App\Form\ModifProfilType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -132,6 +133,7 @@ class ProfilController extends AbstractController
         //return $this->redirectToRoute('app_article_index',['id'=>$user->getId()]);
         return new Response("ok");
     }
+
 
 
 }
