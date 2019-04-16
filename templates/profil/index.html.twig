@@ -70,7 +70,7 @@
                         <button type="button" class="btn btn-primary publier" data-toggle="modal" data-target="#createPublication">
                             Créer une publication
                         </button>
-                    </div>
+                    </div><br>
 
                     {% for article in user.articles %}
                         <div class="row mb-4 border border-dark pt-2" id="article{{ article.id }}">
@@ -104,7 +104,7 @@
                                 {% endif %}
                             </div>
 
-                            <div class="commentaires col-12 border-top pt-2 pb-2">
+                            <div class="commentaires col-12 border-top border-dark pt-2 pb-2">
                                 <div class="commenter">
                                     <small>Commenter :</small>
                                     <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
@@ -134,7 +134,7 @@
                                                     <img src="{{ asset('images/' ~ comment.auteur.photo) }}" alt="" width="50">
                                                 {% endif %}
                                             </div>
-                                            <strong><a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a></strong> a écrit : {{ comment.contenu }}<br>
+                                            <strong><a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a></strong> a écrit : <span>{{ comment.contenu }}</span><br>
                                         </div><br>
                                     {% endfor %}
                                 </div>
