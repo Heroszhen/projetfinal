@@ -17,9 +17,9 @@
         <tbody>
      {% for ami in user.amis %}
         <tr>
-            <td><img src="{{ ami.suiveur.photo }}" alt="{{ ami.suiveur.prenom }}"></td>
-            <td>{{ ami.suiveur.nom }}</td>
-            <td>{{ ami.suiveur.prenom }}</td>
+            <td><img src="{{ ami.suivi.photo }}" alt="{{ ami.suivi.prenom }}"></td>
+            <td>{{ ami.suivi.nom }}</td>
+            <td>{{ ami.suivi.prenom }}</td>
         </tr>
         {% endfor %}
         </tbody>
