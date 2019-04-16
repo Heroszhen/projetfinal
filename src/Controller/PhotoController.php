@@ -31,8 +31,6 @@ class PhotoController extends AbstractController
         //et fait le mapping avec l'entite s'il a ete soumis
         $form->handleRequest($request);
 
-        dump($photo);
-
         //si le formulaire a ete soumis
         if($form->isSubmitted()){
             //si les validations a partir des annotations dans
