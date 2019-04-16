@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        {{ form_start(formodif) }}
+        {{ form_row(formodif.prenom) }}
+        {{ form_row(formodif.nom) }}
+        {{ form_row(formodif.plainPassword) }}
+        {{ form_row(formodif.photo) }}
+        {{ form_row(formodif.date_de_naissance) }}
+        {{ form_row(formodif.bio) }}
+        <button type="submit" class="btn btn-primary">Modifier</button>
+        {{ form_end(formodif) }}
+    </div>
+
+
+
+{% endblock %}
