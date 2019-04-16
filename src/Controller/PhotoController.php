@@ -59,6 +59,8 @@ class PhotoController extends AbstractController
 
                     // on sette l'attribut image de l'article avec son nom pour enregistrement en bdd
                     $photo->setImage($filename);
+
+
                 }
 
                 //enregistrement da la photoo en bdd
@@ -103,6 +105,12 @@ class PhotoController extends AbstractController
         $id = $photo->getId();
         $em->remove($photo);
         $em->flush();
+        
+        // en modification on supprime l'ancienne image
+        // s'il y en a une
+        if(!is_null($photo)){
+            unlink($this->getParameter('upload_dir') . $photo->getImage());
+        }
 
         $this->addFlash('success', 'la photo est supprimée',
             [
