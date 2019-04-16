@@ -108,10 +108,15 @@
                     </div>
 
                     {% for article in user.articles %}
-                        <div class="row mb-4" id="article{{ article.id }}">
+                        <div class="row mb-4 border pt-2" id="article{{ article.id }}">
                             <div class="col-6">
+                                {% if article.auteur.photo is null %}
+                                    <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50">
+                                {% else %}
+                                    <img src="{{ asset('images/' ~ article.auteur.photo) }}" alt="" width="50">
+                                {% endif %}
                                 <a href="#">{{ article.auteur.prenom }}</a><br>
-                                <em>{{ article.datePublication | date('d/m/Y') }}</em>
+                                à <em>{{ article.datePublication | date('h:m d/m/Y') }}</em>
                             </div>
                             {% if app.user == user %}
                             <div class="col-6 text-right">
@@ -143,15 +148,17 @@
                                         <button type="submit" class="btn btn-warning">Publier</button>
                                     </form>
                                 </div>
-                                {% for comment in article.commentaires %}
+
                                     <div id="touscommentaires">
+                                        {% for comment in article.commentaires %}
                                         <div>
                                             <small>À {{ comment.datePublication|date('H:i d/m/Y') }}</small><br>
                                             <div class="vignette"><img src="" alt=""></div>
                                             <strong><a href="{{ path("app_profil_index",{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a></strong> a écrit : {{ comment.contenu }}<br>
                                         </div><br>
+                                        {% endfor %}
                                     </div>
-                                {% endfor %}
+
                             </div>
                         </div>
                     {% endfor %}
