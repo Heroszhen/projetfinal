@@ -93,21 +93,23 @@ class ProfilController extends AbstractController
         $form = $this->createForm(ModifProfilType::class,$user);
         $form->handleRequest($request);
         if($form->isSubmitted()){
-            if($form->isValid()){
+            if($form->isValid()) {
                 $image = $user->getPhoto();
-                if(!is_null($image)){
-                    $newimage = uniqid().'.'.$image->guessExtension();
-                    $image->move($this->getParameter('upload_dir'),$newimage);
+                if (!is_null($image)) {
+                    $newimage = uniqid() . '.' . $image->guessExtension();
+                    $image->move($this->getParameter('upload_dir'), $newimage);
                     $user->setPhoto($newimage);
-                    if(!is_null($originalImage))unlink($this->getParameter('upload_dir').'/'.$originalImage);
-                }else{
+                    if (!is_null($originalImage)) unlink($this->getParameter('upload_dir') . '/' . $originalImage);
+                } else {
                     $user->setPhoto($originalImage);
                 }
                 $manager->persist($user);
                 $manager->flush();
 
                 $user = new User();
-                $form = $this->createForm(ModifProfilType::class,$user);
+                $form = $this->createForm(ModifProfilType::class, $user);
+
+                return $this->redirectToRoute('app_profil_index');
             }
         }
 

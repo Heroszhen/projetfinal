@@ -10,7 +10,7 @@
 
         <div class="col-md-3">
             <div class="imgprofil rounded-circle">
-                <img src="" alt="" class="rounded-circle">
+                <img src="{{ asset('images/' ~ user.photo) }}" alt="" class="rounded-circle" width="100%">
             </div>
             <br>
             {% if app.user == user %}
