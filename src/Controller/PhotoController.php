@@ -63,7 +63,7 @@ class PhotoController extends AbstractController
                     $photo->setImage($filename);
                 }
 
-                //enregistrement da la categorie en bdd
+                //enregistrement da la photoo en bdd
                 $em->persist($photo);
                 $em->flush();
 
@@ -94,4 +94,23 @@ class PhotoController extends AbstractController
             ]);
 
     }
+
+    /**
+     * @Route("/supprimer-photo/{id}")
+     */
+    public function supprimerPhoto(Photo $photo)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $id = $photo->getId();
+        $em->remove($photo);
+        $em->flush();
+
+        $this->addFlash('success', 'la photo est supprimée',
+            [
+                'id' => $id
+            ]);
+        return $this->redirectToRoute('app_photo_index', ['id' => $photo->getId() ]);
+    }
+
 }

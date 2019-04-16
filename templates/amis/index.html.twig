@@ -15,21 +15,13 @@
         </tr>
         </thead>
         <tbody>
+     {% for ami in user.amis %}
         <tr>
-            <td><img src="" alt=""><i class="far fa-smile"></i></td>
-            <td>Prénom 1</td>
-            <td>Nom 1</td>
+            <td><img src="{{ ami.suiveur.photo }}" alt="{{ ami.suiveur.prenom }}"></td>
+            <td>{{ ami.suiveur.nom }}</td>
+            <td>{{ ami.suiveur.prenom }}</td>
         </tr>
-        <tr>
-            <td><img src="" alt=""><i class="far fa-smile"></i></td>
-            <td>Prénom 2</td>
-            <td>Nom 2</td>
-        </tr>
-        <tr>
-            <td><img src="" alt=""><i class="far fa-smile"></i></td>
-            <td>Prénom 3</td>
-            <td>Nom 3</td>
-        </tr>
+        {% endfor %}
         </tbody>
     </table>
 
