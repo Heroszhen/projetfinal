@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ModifProfilType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,6 +72,48 @@ class ProfilController extends AbstractController
 
         return $this->render('profil/index.html.twig', ['user'=>$user,'formp'=>$form->createView()]);
     }
+
+
+    /**
+     * @Route("/edituser/{id}")
+     */
+    public function editUser(User $user, Request $request)
+    {
+        $manager = $this->getDoctrine()->getManager();
+        if (is_null($user)) {
+            $user = $this->getUser();
+        } else {
+            $user = $manager->getRepository(User::class)->find($user);
+        }
+
+        $originalImage = null;
+
+
+        $form = $this->createForm(ModifProfilType::class,$user);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            if($form->isValid()){
+                $image = $user->getPhoto();
+                if(!is_null($image)){
+                    $newimage = uniqid().'.'.$image->guessExtension();
+                    $image->move($this->getParameter('upload_dir'),$newimage);
+                    $user->setPhoto($newimage);
+                    if(!is_null($originalImage))unlink($this->getParameter('upload_dir').'/'.$originalImage);
+                }else{
+                    $user->setPhoto($originalImage);
+                }
+                $manager->persist($user);
+                $manager->flush();
+
+                $user = new User();
+                $form = $this->createForm(ModifProfilType::class,$user);
+            }
+        }
+
+        return $this->render('profil/edituser.html.twig', ['user'=>$user,'formodif'=>$form->createView()]);
+    }
+
+
 
     /**
      * id de l'article
