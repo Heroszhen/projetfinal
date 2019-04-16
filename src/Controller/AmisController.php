@@ -30,7 +30,7 @@ class AmisController extends AbstractController
 
 
     /**
-     * @Route("/{id}")
+     * @Route("/suivre/{id}")
      */
     public function follow(User $amis)
     {
@@ -46,19 +46,19 @@ class AmisController extends AbstractController
     }
 
     /**
-     * @Route("/{id}")
+     * @Route("/delete/{id}")
      */
-    public function unflollow(Amis $amis)
+    public function gggg(Amis $amis)
     {
 
         $em = $this->getDoctrine()->getManager();
 
-        if(!is_null($amis->getId())){
 
             $em->remove($amis);
-        }
+            $em->flush();
 
-        $em->flush();
+
+
 
         return new Response('Vous n\'êtes plus amis :(' );
 
