@@ -29,17 +29,21 @@ class CommentaireController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
         $manager->persist($commentaire);
         $manager->flush();
-        /*
-        $array = [
-        'timepublication'=>$commentaire->getDatePublication()->format('H:i d/m/Y'),
-        'id'=>$commentaire->getAuteur()->getId(),
-        'prenom'=>$commentaire->getAuteur()->getPrenom(),
-        'nom'=>$commentaire->getAuteur()->getNom(),
-        'contenu'=>$commentaire->getContenu()
-    ];*/
-        $r = "<div><small>À ".$commentaire->getDatePublication()->format('H:i d/m/Y')."</small><br><div class=\"vignette\"><img src='' alt=''></div><br><strong><a href='{{ path(\"app_profil_index\",{ \"id\":response.id}) }}'>".$commentaire->getAuteur()->getPrenom()." ".$commentaire->getAuteur()->getNom()."</a></strong> a écrit : ".$commentaire->getContenu()." <br></div><br>";
+
+        $photo = $commentaire->getAuteur()->getPhoto();
+        $image = (is_null($photo))?"http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg":"{{asset('images/' ~ ".$photo.") }}";
+        $r = "<div><div class=\"dropdown\"><small>À ".$commentaire->getDatePublication()->format('H:i d/m/Y')."</small><button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">***</button><div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\"><a class=\"dropdown-item\" href=\"#\">Modifier</a><a class=\"dropdown-item\" href=\"#\">supprimer</a></div></div><div class=\"vignette\"><img src=".$image." alt=''></div><br><strong><a href='{{ path(\"app_profil_index\",{ \"id\":response.id}) }}'>".$commentaire->getAuteur()->getPrenom()." ".$commentaire->getAuteur()->getNom()."</a></strong> a écrit : ".$commentaire->getContenu()." <br><br></div>";
         return new Response($r);
     }
 
+    /**
+     * @Route("/delete/{id}")
+     */
+    public function delete(Commentaire $commentaire){
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($commentaire);
+        $manager->flush();
+        return new Response("ok");
+    }
 
 }

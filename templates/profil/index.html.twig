@@ -16,9 +16,9 @@
             {% if app.user == user %}
 
 
-            <a type="button" class="btn btn-link" href="{{ path('app_profil_edituser', {'id': user.id}) }}">
-                Modifier le profil
-            </a>
+                <a type="button" class="btn btn-link" href="{{ path('app_profil_edituser', {'id': user.id}) }}">
+                    Modifier le profil
+                </a>
 
             {% endif %}
 
@@ -29,9 +29,9 @@
                 <div class="row justify-content-between">
                     <div class="col-12">
                         {% for ami in user.amis %}
-                        <div class="vignette m-1">
-                            <img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="..." width="100%">
-                        </div>
+                            <div class="vignette m-1">
+                                <img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="..." width="100%">
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -45,9 +45,9 @@
                 <div class="row justify-content-start">
                     <div class="col-12">
                         {% for photo in user.photos  %}
-                        <div class="vignette m-1">
-                            <img src="{{ asset('images/' ~ photo.image) }}" alt="..." width="100%">
-                        </div>
+                            <div class="vignette m-1">
+                                <img src="{{ asset('images/' ~ photo.image) }}" alt="..." width="100%">
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -84,16 +84,16 @@
                                 à <em>{{ article.datePublication | date('h:m d/m/Y') }}</em>
                             </div>
                             {% if app.user == user %}
-                            <div class="col-6 text-right">
-                                <div class="btn-group">
-                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item update-article" data-toggle="modal" data-target="#createPublication" data-article="{{ article.id }}" href="#">Modifier</a>
-                                        <a class="dropdown-item delete-article" data-article="article{{ article.id }}" href="{{ path('app_profil_delete',{'id':article.id}) }}">Supprimer</a>
+                                <div class="col-6 text-right">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item update-article" data-toggle="modal" data-target="#createPublication" data-article="{{ article.id }}" href="#">Modifier</a>
+                                            <a class="dropdown-item delete-article" data-article="article{{ article.id }}" href="{{ path('app_profil_delete',{'id':article.id}) }}">Supprimer</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             {% endif %}
                             <div class="col-12 contenu pb-3">
                                 {{ article.contenu }}
@@ -114,10 +114,19 @@
                                     </form>
                                 </div>
 
-                                    <div id="touscommentaires">
-                                        {% for comment in article.commentaires %}
+                                <div id="touscommentaires">
+                                    {% for comment in article.commentaires %}
                                         <div>
-                                            <small>À {{ comment.datePublication|date('H:i d/m/Y') }}</small><br>
+                                            <div class="dropdown">
+                                                <small>À {{ comment.datePublication|date('H:i d/m/Y') }}</small>
+                                                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-certificate"></i>
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item update-comment" href="#">Modifier</a>
+                                                    <a class="dropdown-item delete-comment" href="{{ path('app_commentaire_delete',{'id':comment.id}) }}">Supprimer</a>
+                                                </div>
+                                            </div>
                                             <div class="vignette">
                                                 {% if comment.auteur.photo is null %}
                                                     <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50">
@@ -127,43 +136,43 @@
                                             </div>
                                             <strong><a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a></strong> a écrit : {{ comment.contenu }}<br>
                                         </div><br>
-                                        {% endfor %}
-                                    </div>
+                                    {% endfor %}
+                                </div>
 
                             </div>
                         </div>
                     {% endfor %}
                 </div>
+            </div>
+
         </div>
 
-</div>
-
-    <!-- Modal pour les publications(articles)-->
-    <div class="modal fade" id="createPublication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Créer une publication</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
-                        {{ form_start(formp) }}
-                        {{ form_row(formp.contenu) }}
-                        {{ form_row(formp.image) }}
-                        <p id="counter"><em>0</em> caractère(s)</p>
-                        <button type="submit" class="btn btn-primary">Publier</button>
-                        {{ form_end(formp) }}
+        <!-- Modal pour les publications(articles)-->
+        <div class="modal fade" id="createPublication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Créer une publication</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            {{ form_start(formp) }}
+                            {{ form_row(formp.contenu) }}
+                            {{ form_row(formp.image) }}
+                            <p id="counter"><em>0</em> caractère(s)</p>
+                            <button type="submit" class="btn btn-primary">Publier</button>
+                            {{ form_end(formp) }}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}

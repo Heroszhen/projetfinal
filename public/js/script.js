@@ -77,8 +77,22 @@ $('.formcommentaire').each(function(){
             function(response){
                form.parent().parent().find("#touscommentaires").prepend(response);
             },
-
         );
     });
 });
 
+$(".delete-comment").click(function(e){
+    e.preventDefault();
+    var href= $(this).attr('href');
+    var ba = $(this);
+    $.get(
+        href,
+        function(response){
+            if(response=="ok")ba.parent().parent().parent().remove();
+        }
+    );
+});
+
+$(".update-comment").click(function(e){
+    e.preventDefault();
+});
