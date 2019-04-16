@@ -1,11 +1,12 @@
 body{
-    background-image: url("/images/socialnetwork.png");
+    background-image: url("/images/wallpaper.jpg");
     background-repeat: repeat;
     background-attachment: fixed;
 }
 
 .transparence{
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.8);
+    min-height: 100vh;
 }
 
 #navbar{
