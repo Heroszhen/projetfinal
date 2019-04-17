@@ -134,7 +134,9 @@
                                                     <img src="{{ asset('images/' ~ comment.auteur.photo) }}" alt="" width="50">
                                                 {% endif %}
                                             </div>
-                                            <strong><a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a></strong> a écrit : <span>{{ comment.contenu }}</span><br>
+                                            <strong>
+                                                <a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a>
+                                            </strong> a écrit : <span>{{ comment.contenu }}</span><br>
                                         </div><br>
                                     {% endfor %}
                                 </div>
