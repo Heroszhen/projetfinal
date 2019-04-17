@@ -47,4 +47,15 @@ class CommentaireController extends AbstractController
         return new Response("ok");
     }
 
+    /**
+     * @Route("/update/{id}")
+     */
+    public function update(Commentaire $commentaire,Request $request){
+        $manager = $this->getDoctrine()->getManager();
+        $commentaire->setContenu($request->request->get("input"));
+        $manager->persist($commentaire);
+        $manager->flush();
+        return new Response("ok");
+    }
+
 }
