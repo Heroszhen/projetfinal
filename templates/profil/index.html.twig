@@ -70,10 +70,10 @@
                         <button type="button" class="btn btn-primary publier" data-toggle="modal" data-target="#createPublication">
                             Créer une publication
                         </button>
-                    </div>
+                    </div><br>
 
                     {% for article in user.articles %}
-                        <div class="row mb-4 border pt-2" id="article{{ article.id }}">
+                        <div class="row mb-4 border border-dark pt-2" id="article{{ article.id }}">
                             <div class="col-6">
                                 {% if article.auteur.photo is null %}
                                     <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50">
@@ -104,7 +104,7 @@
                                 {% endif %}
                             </div>
 
-                            <div class="commentaires col-12 border-top pt-2 pb-2">
+                            <div class="commentaires col-12 border-top border-dark pt-2 pb-2">
                                 <div class="commenter">
                                     <small>Commenter :</small>
                                     <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
@@ -123,7 +123,7 @@
                                                     <i class="fas fa-certificate"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item update-comment" href="#">Modifier</a>
+                                                    <a data-id="{{ comment.id }}" class="dropdown-item update-comment" href="{{ path('app_commentaire_update',{'id':comment.id}) }}">Modifier</a>
                                                     <a class="dropdown-item delete-comment" href="{{ path('app_commentaire_delete',{'id':comment.id}) }}">Supprimer</a>
                                                 </div>
                                             </div>
@@ -134,7 +134,7 @@
                                                     <img src="{{ asset('images/' ~ comment.auteur.photo) }}" alt="" width="50">
                                                 {% endif %}
                                             </div>
-                                            <strong><a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a></strong> a écrit : {{ comment.contenu }}<br>
+                                            <strong><a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a></strong> a écrit : <span>{{ comment.contenu }}</span><br>
                                         </div><br>
                                     {% endfor %}
                                 </div>

@@ -95,6 +95,28 @@ $(".delete-comment").click(function(e){
 
 $(".update-comment").click(function(e){
     e.preventDefault();
+    var span = $(this).parent().parent().parent().find("span");
+    var texte = span.text();
+    var id = $(this).attr('data-id');
+    span.html("<form method='post' id='"+id+"' onsubmit='fcommentaire("+id+");return false;'><input type='text' name='comment' value='"+texte+"'>&nbsp;<button type='submit' class='btn btn-link btn-sm'>Commenter</button></form>");
 });
+
+function fcommentaire(id) {
+    var value = $("#"+id).find('input').val();
+    var url = $("a[data-id='"+id+"']").attr("href");
+    console.log(value);
+    $.ajax({
+        type: "post",
+        url: url,
+        data: "id="+id+"&input="+value,
+        datatype: "text",
+        success: function(rep){
+            if(rep=='ok'){
+                $("form#"+id).parent().html(value);
+            }
+        },
+        error: function(xhr, status, err){}
+    })
+}
 
 
