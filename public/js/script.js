@@ -96,3 +96,5 @@ $(".delete-comment").click(function(e){
 $(".update-comment").click(function(e){
     e.preventDefault();
 });
+
+

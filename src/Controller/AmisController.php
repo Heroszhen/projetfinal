@@ -48,7 +48,7 @@ class AmisController extends AbstractController
     /**
      * @Route("/delete/{id}")
      */
-    public function gggg(Amis $amis)
+    public function unfollow(Amis $amis, User $user)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -58,9 +58,7 @@ class AmisController extends AbstractController
             $em->flush();
 
 
-
-
-        return new Response('Vous n\'êtes plus amis :(' );
+        return new Response("Cet ami n'est plus suivi");
 
     }
 }
