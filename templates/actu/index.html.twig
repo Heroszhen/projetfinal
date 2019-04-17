@@ -5,8 +5,14 @@
 {% block body %}
 <h2>Fil d'actualité</h2>
 <div class="row justify-content-between">
-    <div class="col-md-3">Lalala</div>
-    <div class="col-md-9">
+
+
+    <div class="col-md-3 mt-5"></div>
+
+
+    {# LISTE DES PUBLICATIONS #}
+
+    <div class="col-md-9 mt-5">
         <div class="actu">
 
             <a href="">
@@ -16,8 +22,38 @@
             <br>
             <small>28/12/1990 à 12:34</small>
             <div class="mt-2 publication">
-                Saepissime igitur mihi de amicitia cogitanti maxime illud considerandum videri solet, utrum propter imbecillitatem atque inopiam desiderata sit amicitia, ut dandis recipiendisque meritis quod quisque minus per se ipse posset, id acciperet ab alio vicissimque redderet, an esset hoc quidem proprium amicitiae, sed antiquior et pulchrior et magis a natura ipsa profecta alia causa.
+                <p>
+                    Saepissime igitur mihi de amicitia cogitanti maxime illud considerandum videri solet, utrum propter imbecillitatem atque inopiam desiderata sit amicitia, ut dandis recipiendisque meritis quod quisque minus per se ipse posset, id acciperet ab alio vicissimque redderet, an esset hoc quidem proprium amicitiae, sed antiquior et pulchrior et magis a natura ipsa profecta alia causa.
+                </p>
+
+                <div class="text-center">
+                    <img src="">Image
+                </div>
             </div>
+
+
+            {# COMMENTAIRES #}
+            <div class="toast" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="..." class="rounded mr-2" alt="...">
+                    <strong class="mr-auto"><a href="">Prénom Nom</a></strong>
+                    <small class="text-muted">11 mins ago</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    <small>
+                        Et quia Mesopotamiae tractus omnes crebro inquietari sueti praetenturis et stationibus servabantur agrariis, laevorsum flexo itinere Osdroenae subsederat extimas partes, novum parumque aliquando temptatum commentum adgressus. quod si impetrasset, fulminis modo cuncta vastarat. erat autem quod cogitabat huius modi.
+                    </small>
+                </div>
+            </div>
+
+            {# FIN DES COMMENTAIRES #}
+
+
+
+            {#
             <div class="commentaire">
                 <small>Commenter :</small>
                 <form action="">
@@ -29,13 +65,18 @@
                         <div class="vignette"></div>
                         Prénon Nom
                     </a>
+                    <p>Contenu du commentaire</p>
                 </small>
-
             </div>
+            #}
+
 
         </div>
-
     </div>
+
+    {# FIN DE LA LISTE DES PUBLICATIONS #}
+
+
 </div>
 
 
