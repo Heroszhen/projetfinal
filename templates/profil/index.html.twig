@@ -123,7 +123,7 @@
                                                     <i class="fas fa-certificate"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item update-comment" href="#">Modifier</a>
+                                                    <a data-id="{{ comment.id }}" class="dropdown-item update-comment" href="{{ path('app_commentaire_update',{'id':comment.id}) }}">Modifier</a>
                                                     <a class="dropdown-item delete-comment" href="{{ path('app_commentaire_delete',{'id':comment.id}) }}">Supprimer</a>
                                                 </div>
                                             </div>
