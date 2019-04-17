@@ -118,3 +118,17 @@ function fcommentaire(id) {
         error: function(xhr, status, err){}
     })
 }
+
+$(".delete-friend").click(function(e){
+    e.preventDefault();
+    var href= $(this).attr('href');
+    var ba = $(this);
+    $.get(
+        href,
+        function(response){
+            if(response=="ok")ba.parent().parent().remove();
+        }
+    );
+});
+
+
