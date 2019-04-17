@@ -106,7 +106,7 @@
 
                             <div class="commentaires col-12 border-top border-dark pt-2 pb-2">
                                 <div class="commenter">
-                                    <small>Commenter :</small>
+                                    <small><a href='#' class="showcomments btn btn-link" >Commenter</a> :</small>
                                     <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
                                         <input type="text" name="commentaire">
                                         <input type="hidden">
@@ -114,7 +114,7 @@
                                     </form>
                                 </div>
 
-                                <div id="touscommentaires">
+                                <div class="touscommentaires">
                                     {% for comment in article.commentaires %}
                                         <div>
                                             <div class="dropdown">

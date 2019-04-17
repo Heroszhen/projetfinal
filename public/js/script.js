@@ -75,7 +75,7 @@ $('.formcommentaire').each(function(){
             action,
             $(this).serialize(),
             function(response){
-               form.parent().parent().find("#touscommentaires").prepend(response);
+               form.parent().parent().find(".touscommentaires").prepend(response);
             },
         );
     });
@@ -131,4 +131,9 @@ $(".delete-friend").click(function(e){
     );
 });
 
-
+$(".showcomments").each(function(){
+    $(this).click(function(e){
+        e.preventDefault();
+        console.log($(this).parent().parent().parent().find(".touscommentaires > div").toggle());
+    })
+});
