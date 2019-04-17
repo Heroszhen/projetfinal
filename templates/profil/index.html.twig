@@ -4,19 +4,29 @@
 
 {% block body %}
 
-    <h2 class="mt-3">Prénom Nom</h2>
+
 
     <div class="row justify-content-between">
 
-        <div class="col-md-3">
-            <div class="imgprofil rounded-circle">
+        <div class="col-md-5">
+            <h2 class="mt-5">Prénom Nom</h2>
+
+
+            <div class="imgprofil rounded-circle mt-3">
                 <img src="" alt="" class="rounded-circle">
             </div>
             <br>
+
+            <div class="row justify-content-start">
+                <button class="btn btn-primary col-3 mx-2"><i class="fas fa-user-plus"></i></button>
+                <button class="btn btn-danger col-3 mx-2"><i class="fas fa-user-minus"></i></button>
+            </div>
+
+            <br>
+            <br>
             {% if app.user == user %}
 
-
-            <a type="button" class="btn btn-link" href="{{ path('app_profil_edituser', {'id': user.id}) }}">
+                <a type="button" class="btn btn-link" href="{{ path('app_profil_edituser', {'id': user.id}) }}">
                 Modifier le profil
             </a>
 
@@ -51,7 +61,7 @@
                     <a href="{{ path('app_photo_index') }}">Album photo</a>
                 </h5>
                 <div class="row justify-content-start">
-                    <div class="col-12">
+                    <div class="col-6">
                         {% for photo in user.photos  %}
                         <div class="vignette m-1">
                             <img src="{{ asset('images/' ~ photo.image) }}" alt="..." width="100%">
@@ -63,9 +73,9 @@
         </div>
 
 
-        <div class="col-md-8">
+        <div class="col-md-7">
 
-            <div class="bio">
+            <div class="bio mt-5">
                 <h3>Présentation</h3>
                 <p class="text-justify">{{ user.bio|nl2br }}</p>
 
@@ -75,13 +85,13 @@
             <div class="mt-5">
                 <div class="container" id="articles">
                     <div class="row">
-                        <button type="button" class="btn btn-primary publier" data-toggle="modal" data-target="#createPublication">
+                        <button type="button" class="btn btn-primary publier mb-5" data-toggle="modal" data-target="#createPublication">
                             Créer une publication
                         </button>
                     </div>
 
                     {% for article in user.articles %}
-                        <div class="row mb-4 border pt-2" id="article{{ article.id }}">
+                        <div class="row mt-3 mb-4 border pt-2" id="article{{ article.id }}">
                             <div class="col-6">
                                 {% if article.auteur.photo is null %}
                                     <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50">
@@ -133,7 +143,7 @@
                                                     <img src="{{ asset('images/' ~ comment.auteur.photo) }}" alt="" width="50">
                                                 {% endif %}
                                             </div>
-                                            <strong><a href="{{ path("app_profil_index",{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a></strong> a écrit : {{ comment.contenu }}<br>
+                                            <small><strong><a href="{{ path("app_profil_index",{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a></strong> a écrit : {{ comment.contenu }}</small><br>
                                         </div><br>
                                         {% endfor %}
                                     </div>
@@ -142,9 +152,11 @@
                         </div>
                     {% endfor %}
                 </div>
-        </div>f
-
+        </div>
 </div>
+
+
+
 
     <!-- Modal pour les publications(articles)-->
     <div class="modal fade" id="createPublication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

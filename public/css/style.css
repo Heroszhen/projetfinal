@@ -5,7 +5,7 @@ body{
 }
 
 .transparence{
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     min-height: 100vh;
 }
 
@@ -14,8 +14,8 @@ body{
 }
 
 .imgprofil{
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     -webkit-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
     box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
@@ -57,4 +57,29 @@ body{
     -webkit-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
     -moz-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
     box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
+}
+
+.actu{
+    width: 70vh;
+    min-height: 10vh;
+    border: black 1px solid;
+    border-radius: 20px;
+    background-color: white;
+    padding: 25px;
+}
+
+.publication{
+    text-align: justify;
+    padding: 0 20px;
+}
+
+.commentaire{
+    width: 50vh;
+    min-height: 10vh;
+    border: black 1px solid;
+    border-radius: 20px;
+    background-color: white;
+    padding: 10px 20px;
+    margin: 40px auto 0;
+
 }
