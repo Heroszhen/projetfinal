@@ -125,7 +125,7 @@
                             <div class="commentaires col-12 border-top border-dark pt-2 pb-2">
                                 <div class="commenter">
                                     <small><a class="showcomments btn btn-link" href="#">Commenter</a> :</small>
-                                    <form></form>
+
                                     <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
                                         <input type="text" name="commentaire">
                                         <input type="hidden">
