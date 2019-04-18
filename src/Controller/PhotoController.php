@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Photo;
+use App\Entity\User;
 use App\Form\PhotoType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -12,15 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class PhotoController extends AbstractController
 {
     /**
-     * @Route("/photo")
+     * @Route("/photo/{id}")
      */
-    public function index(Request $request)
+    public function index(User $user, Request $request)
     {
 
         //user connecte
-        $user = $this->getUser();
+        //$user = $this->getUser();
 
-        //*******************les photos
+        //*******************les photos*********
         //lien entre entite et bdd
         $em = $this->getDoctrine()->getManager();
         //instanciation
