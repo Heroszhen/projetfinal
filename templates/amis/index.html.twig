@@ -18,9 +18,9 @@
         <tbody>
      {% for ami in user.amis %}
         <tr>
-            <td><img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="{{ ami.suivi.prenom }}"></td>
-            <td>{{ ami.suivi.prenom }}</td>
-            <td>{{ ami.suivi.nom }}</td>
+            <td><a href="{{ path('app_profil_index',{ 'id':ami.suivi.id }) }}"><img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="{{ ami.suivi.prenom }}" width="100"></a></td>
+            <td><a href="{{ path('app_profil_index',{ 'id':ami.suivi.id }) }}">{{ ami.suivi.prenom }}</a></td>
+            <td><a href="{{ path('app_profil_index',{ 'id':ami.suivi.id }) }}"> {{ ami.suivi.nom }}</a></td>
             <td>
                 <a href="{{ path('app_amis_unfollow', {'id': ami.id}) }}" class="delete-friend">
                     <i class="fas fa-user-minus"></i>

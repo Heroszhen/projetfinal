@@ -88,15 +88,15 @@
                     <br>
 
                     {% for article in user.articles %}
-                        <div class="row mb-4 border border-dark pt-2 actu" id="article{{ article.id }}">
+                        <div class="row mb-4 border border-dark pt-2 rounded actu" id="article{{ article.id }}">
                             <div class="col-6">
                                 {% if article.auteur.photo is null %}
                                     <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50">
                                 {% else %}
                                     <img src="{{ asset('images/' ~ article.auteur.photo) }}" alt="" width="50" class="mr-2">
                                 {% endif %}
-                                <a href="#">{{ article.auteur.prenom }}</a>
-                                <a href="#">{{ article.auteur.nom }}</a><br>
+                                <a href="#">{{ article.auteur.prenom }} {{ article.auteur.nom }}</a>
+                                <br>
                                 à <em>{{ article.datePublication | date('h:m d/m/Y') }}</em>
                             </div>
                             {% if app.user == user %}

@@ -7,6 +7,7 @@ body{
 .transparence{
     background: rgba(255, 255, 255, 0.9);
     min-height: 100vh;
+    min-width: 100vh;
 }
 
 #navbar{
@@ -73,10 +74,8 @@ body{
 }
 
 .actu{
-    width: 70vh;
+    max-width: 100vh;
     min-height: 10vh;
-    border: black 1px solid;
-    border-radius: 5px;
     background-color: white;
     padding: 25px;
     margin: 0 auto;
