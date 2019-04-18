@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\User;
+use App\Form\ArticleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -13,14 +16,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class ActuController extends AbstractController
 {
     /**
-     * @Route("/{id}")
+     * @Route("/{id}", defaults={"id": null})
      */
-    public function index()
+    public function index(User $user, Request $request)
     {
-
-        $user = new User();
-
-
         return $this->render('actu/index.html.twig', [
             'controller_name' => 'ActuController',
         ]);
