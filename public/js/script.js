@@ -19,11 +19,14 @@ $('.delete-article').click(function(e){
     $.get(
         href,
         function(response){
+            console.log(response);
             if(response === 'ok'){
                 $('#'+id).remove();
             }
         }
     );
+    console.log($(this).attr('href'));
+
 });
 
 $('.publier').click(function(){
@@ -66,6 +69,7 @@ $('.formcommentaire').each(function(){
     $(this).submit(function(e) {
         e.preventDefault();
         var action = $(this).attr("action");
+        console.log(action);
         var form = $(this);
         $.post(
             action,
@@ -112,6 +116,7 @@ $(".update-comment").click(function(e){
 function fcommentaire(id) {
     var value = $("#"+id).find('input').val();
     var url = $("a[data-id='"+id+"']").attr("href");
+    console.log(value);
     $.ajax({
         type: "post",
         url: url,

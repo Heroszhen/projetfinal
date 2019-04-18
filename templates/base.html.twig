@@ -33,7 +33,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-warning">
     <div class="container navbar-nav">
-        <a class="navbar-brand" href="">
+        <a class="navbar-brand" href="#">
             Accueil
         </a>
         <div class="navbar-collapse">
@@ -56,10 +56,14 @@
 
         </div>
 
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
-            <a class="btn btn-outline-light my-2 my-sm-0" href="">Rechercher</a>
+
+       <form class="form-inline my-2 my-lg-0" id="fsearch" action="{{ path('app_recherche_recherche') }}" method="POST">
+            <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" name="nom">
+           <button type="submit" data-href="{{ path('app_recherche_recherche') }}" class="btn btn-outline-light my-2 my-sm-0 search-user">
+               Rechercher
+           </button>
         </form>
+
 
 
         {% endif %}

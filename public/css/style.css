@@ -93,3 +93,11 @@ body{
     margin: 40px auto 0;
 
 }
+/*************************************La page photo**************************************************************/
+/* passage de la souris*/
+img.zoom{
+    cursor: zoom-in;
+}
+img.zoom:hover{
+    transform: scale(2);
+}

@@ -13,20 +13,14 @@ class RechercheController extends AbstractController
      * @Route("/recherche")
      */
     public function rechercheAction(Request $request)
+
     {
-        $em = $this->getDoctrine()->getManager();
+        // pour recuperer les methode de repository
+        //$repository contient une instance de app\repository\userRepository
+        $repository = $this->getDoctrine()->getRepository(User::class);
 
-        $users = $em->getRepository(User::class)->findAll();
-
-        if($request->isMethod('POST')){
-            $nom = $request->get('nom');
-            $users = $em->getRepository(User::class)->findBy(['nom'=> $nom]);
-
-            return $this->redirectToRoute('app_recherche_recherche',
-            [
-                'users' => $users
-            ]);
-        }
+        //la methode search dans UserRepository
+        $users = $repository->search($request->request->get("nom"));
 
         return $this->render('recherche/index.html.twig',
         [
