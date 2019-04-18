@@ -20,8 +20,10 @@ class PhotoController extends AbstractController
         //user connecte
         $user = $this->getUser();
 
-        //les photos
+        //*******************les photos
+        //lien entre entite et bdd
         $em = $this->getDoctrine()->getManager();
+        //instanciation
         $photo = new Photo();
 
         //creation du formulaire relie au commantaire
@@ -59,6 +61,8 @@ class PhotoController extends AbstractController
 
                     // on sette l'attribut image de l'article avec son nom pour enregistrement en bdd
                     $photo->setImage($filename);
+
+
                 }
 
                 //enregistrement da la photoo en bdd
@@ -80,6 +84,8 @@ class PhotoController extends AbstractController
             }
         }
 
+        // pour recuperer les methode de repository
+        //$repository contient une instance de app\repository\userRepository
         $repository = $this->getDoctrine()->getRepository(Photo::class);
         // eq de findall() mais avec un tri sur le nom
         $photos = $repository->findBy(['user' => $user], ['datePublication' => 'DESC']);
@@ -101,8 +107,15 @@ class PhotoController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $id = $photo->getId();
+        //suppression de la bdd
         $em->remove($photo);
         $em->flush();
+        
+        // en modification on supprime l'ancienne image
+        // s'il y en a une
+        if(!is_null($photo)){
+           unlink($this->getParameter('upload_dir') . $photo->getImage());
+        }
 
         $this->addFlash('success', 'la photo est supprimée',
             [
