@@ -13,6 +13,13 @@ body{
     background-color: #004683 !important;
 }
 
+.bg-primary{
+    background-color: #004683;
+}
+.btn-primary{
+    background-color: #004683;
+}
+
 .profilphoto{
     width: 250px;
     text-align: center;
@@ -22,9 +29,9 @@ body{
     max-height: 250px;
     max-width: 250px;
     overflow: hidden;
-    -webkit-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
-    -moz-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
-    box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
+    box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
 }
 .danger{
     color: red;
@@ -72,6 +79,7 @@ body{
     border-radius: 5px;
     background-color: white;
     padding: 25px;
+    margin: 0 auto;
 }
 
 .publication{
