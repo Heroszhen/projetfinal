@@ -8,6 +8,8 @@
 
     <div class="row justify-content-between">
 
+        {# COLONNE DE GAUCHE #}
+
         <div class="col-md-5">
             <h2 class="mt-5">{{ user.prenom}} {{ user.nom }}</h2>
 
@@ -31,8 +33,13 @@
                 {% endif %}
             </div>
 
+            <div class="bio mt-5">
+                <h3>Biographie</h3>
+                <p class="text-justify col-md-8">{{ user.bio|nl2br }}</p>
+            </div>
+
             <br>
-            <br>
+
             {% if app.user == user %}
 
                 <a type="button" class="btn btn-link" href="{{ path('app_profil_edituser', {'id': user.id}) }}">
@@ -74,34 +81,32 @@
         </div>
 
 
+        {# COLONNE DE DROITE #}
+
+
         <div class="col-md-7">
 
-            <div class="bio mt-5">
-                <h3>Présentation</h3>
-                <p class="text-justify">{{ user.bio|nl2br }}</p>
-
-            </div>
-
-            {#les publications(articles)#}
+            {# Les publications(articles) #}
             <div class="mt-5">
                 <div class="container" id="articles">
+                    {% if user == app.user %}
                     <div class="row">
                         <button type="button" class="btn btn-primary publier" data-toggle="modal" data-target="#createPublication">
                             Créer une publication
                         </button>
                     </div>
                     <br>
-
+                    {% endif %}
                     {% for article in user.articles %}
-                        <div class="row mb-4 border border-dark pt-2 actu" id="article{{ article.id }}">
+                        <div class="row mb-4 border border-dark pt-2 rounded actu" id="article{{ article.id }}">
                             <div class="col-6">
                                 {% if article.auteur.photo is null %}
                                     <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50">
                                 {% else %}
                                     <img src="{{ asset('images/' ~ article.auteur.photo) }}" alt="" width="50" class="mr-2">
                                 {% endif %}
-                                <a href="#">{{ article.auteur.prenom }}</a>
-                                <a href="#">{{ article.auteur.nom }}</a><br>
+                                <a href="#">{{ article.auteur.prenom }} {{ article.auteur.nom }}</a>
+                                <br>
                                 à <em>{{ article.datePublication | date('h:m d/m/Y') }}</em>
                             </div>
                             {% if app.user == user %}
@@ -128,15 +133,16 @@
                             {# COMMENTAIRES #}
                             <div class="commentaires col-12 border-top border-dark pt-2 pb-2">
                                 <div class="commenter">
-                                    <small>Commenter :</small>
+                                    <small><a class="showcomments btn btn-link" href="#">Commenter</a> :</small>
+                                    <form></form>
                                     <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
                                         <input type="text" name="commentaire">
                                         <input type="hidden">
-                                        <button type="submit" class="btn btn-primary">Publier</button>
+                                        <button type="submit" class="btn btn-link">Publier</button>
                                     </form>
                                 </div>
 
-                                <div id="touscommentaires">
+                                <div class="touscommentaires">
                                     {% for comment in article.commentaires %}
                                         <div>
                                             <div class="dropdown">
@@ -156,15 +162,15 @@
                                                     <img src="{{ asset('images/' ~ comment.auteur.photo) }}" alt="" width="50">
                                                 {% endif %}
                                             </div>
-                                                <a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a> :
+                                            <small><a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a> :</small>
                                             <br>
-                                            <div class="text-justify">
-                                                <small>
+                                            <div class="text-justify row">
+                                                <small class="col-12">
                                                     <span>{{ comment.contenu }}</span>
                                                 </small>
-                                            </div>
+                                            </div><br>
                                         </div>
-                                        <br>
+
                                     {% endfor %}
                                 </div>
 
