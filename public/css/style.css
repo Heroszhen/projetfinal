@@ -73,13 +73,7 @@ body{
 }
 
 .actu{
-    width: 70vh;
-    min-height: 10vh;
-    border: black 1px solid;
-    border-radius: 5px;
     background-color: white;
-    padding: 25px;
-    margin: 0 auto;
 }
 
 .publication{
