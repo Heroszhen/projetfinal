@@ -19,14 +19,11 @@ $('.delete-article').click(function(e){
     $.get(
         href,
         function(response){
-            console.log(response);
             if(response === 'ok'){
                 $('#'+id).remove();
             }
         }
     );
-    console.log($(this).attr('href'));
-
 });
 
 $('.publier').click(function(){
@@ -69,13 +66,12 @@ $('.formcommentaire').each(function(){
     $(this).submit(function(e) {
         e.preventDefault();
         var action = $(this).attr("action");
-        console.log(action);
         var form = $(this);
         $.post(
             action,
             $(this).serialize(),
             function(response){
-               form.parent().parent().find("#touscommentaires").prepend(response);
+               form.parent().parent().find(".touscommentaires").prepend(response);
             },
         );
     });
@@ -93,6 +89,18 @@ $(".delete-comment").click(function(e){
     );
 });
 
+function fdelete(id){
+    var ba=$("#d"+id);
+    $.get(
+        '/commentaire/delete/'+id,
+        function(response){
+            if(response=="ok")ba.parent().parent().parent().remove();
+        }
+    );
+}
+
+
+
 $(".update-comment").click(function(e){
     e.preventDefault();
     var span = $(this).parent().parent().parent().find("span");
@@ -104,7 +112,6 @@ $(".update-comment").click(function(e){
 function fcommentaire(id) {
     var value = $("#"+id).find('input').val();
     var url = $("a[data-id='"+id+"']").attr("href");
-    console.log(value);
     $.ajax({
         type: "post",
         url: url,
@@ -119,6 +126,29 @@ function fcommentaire(id) {
     })
 }
 
+function fupdate(id){
+    var span = $("#up"+id).parent().parent().parent().find("span");
+    var texte = span.text();
+    span.html("<form method='post' id='"+id+"' onsubmit='fcommentaire2("+id+");return false;'><input type='text' name='comment' value='"+texte+"'>&nbsp;<button type='submit' class='btn btn-link btn-sm'>Commenter</button></form>");
+}
+
+function fcommentaire2(id) {
+    var value = $("#"+id).find('input').val();
+    $.ajax({
+        type: "post",
+        url: '/commentaire/update/'+id,
+        data: "input="+value,
+        datatype: "text",
+        success: function(rep){
+            if(rep=='ok'){
+                $("form#"+id).parent().html(value);
+            }
+        },
+        error: function(xhr, status, err){}
+    })
+}
+
+
 $(".delete-friend").click(function(e){
     e.preventDefault();
     var href= $(this).attr('href');
@@ -132,3 +162,9 @@ $(".delete-friend").click(function(e){
 });
 
 
+$(".showcomments").each(function(){
+    $(this).click(function(e){
+        e.preventDefault();
+        $(this).parent().parent().parent().find(".touscommentaires > div").toggle();
+    })
+});

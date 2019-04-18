@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ActuController extends AbstractController
 {
     /**
-     * @Route("/{id}", defaults={"id": null})
+     * @Route("/{id}")
      */
     public function index(User $user, Request $request)
     {
