@@ -56,10 +56,12 @@
 
         </div>
 
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Rechercher</button>
+
+       <form class="form-inline my-2 my-lg-0" method="POST">
+            <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" name="nom">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit" name="submit">Rechercher</button>
         </form>
+
 
 
         {% endif %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RechercheController!{% endblock %}
+
+{% block body %}
+    <table>
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+
+        {% for user in users  %}
+
+
+        <tr>
+            <td>{{ user.prenom  }}</td>
+            <td>{{ user.nom }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
