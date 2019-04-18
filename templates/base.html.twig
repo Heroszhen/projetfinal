@@ -57,9 +57,11 @@
         </div>
 
 
-       <form class="form-inline my-2 my-lg-0" method="POST">
+       <form class="form-inline my-2 my-lg-0" id="fsearch" action="{{ path('app_recherche_recherche') }}" method="POST">
             <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" name="nom">
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit" name="submit">Rechercher</button>
+           <button type="submit" data-href="{{ path('app_recherche_recherche') }}" class="btn btn-outline-light my-2 my-sm-0 search-user">
+               Rechercher
+           </button>
         </form>
 
 

@@ -131,4 +131,4 @@ $(".delete-friend").click(function(e){
     );
 });
 
-
+;
