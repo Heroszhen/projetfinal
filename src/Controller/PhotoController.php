@@ -79,7 +79,7 @@ class PhotoController extends AbstractController
                 return $this->redirectToRoute(
                     $request->get('_route'),
                     [
-                        'id' => $photo->getId()
+                        'id' => $photo->getUser()->getId()
                     ]
                 );
             }
@@ -108,6 +108,8 @@ class PhotoController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $id = $photo->getId();
+        $id2 = $photo->getUser()->getId();
+
         //suppression de la bdd
         $em->remove($photo);
         $em->flush();
@@ -122,7 +124,7 @@ class PhotoController extends AbstractController
             [
                 'id' => $id
             ]);
-        return $this->redirectToRoute('app_photo_index', ['id' => $photo->getId() ]);
+        return $this->redirectToRoute('app_photo_index', ['id' => $id2 ]);
     }
 
 }
