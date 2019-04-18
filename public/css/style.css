@@ -94,10 +94,27 @@ body{
 
 }
 /*************************************La page photo**************************************************************/
-/* passage de la souris*/
+/* passage de la souris
 img.zoom{
     cursor: zoom-in;
 }
 img.zoom:hover{
     transform: scale(2);
+
+}*/
+.imgEffets img{
+    z-index: 1; /*DE base*/
+    height: 150px;
+    box-shadow: 0 0 3px black;
+    transition: 0.5s cubic-bezier(0,3,.4,1);
+}
+.imgEffets img:hover { /*quand je survol les li l'image qui bouge*/
+    z-index: 2; /* QUAND JE SURVOL l'image , il vient en dessus des auyres*/
+    transform: scale(2);
+    box-shadow: 0 0 10px black;
+    /*filter: grayscale(2) blur(20px);*/
+}
+.imgEffets:hover img:not(:hover){ /* concerne que li qui est survolé (img)*/
+    filter: grayscale(1) blur(10px); /* grayscale: convertie votre image en nuances de gris et blur applique un flou*/
+
 }
