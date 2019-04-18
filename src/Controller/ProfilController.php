@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Amis;
 use App\Entity\Photo;
 use App\Form\ModifProfilType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,11 +27,16 @@ class ProfilController extends AbstractController
      */
     public function index($id, Request $request)
     {
+        $estami=[];
         $manager = $this->getDoctrine()->getManager();
         if (is_null($id)) {
             $user = $this->getUser();
         } else {
             $user  = $manager->getRepository(User::class)->find($id);
+            $estami = $manager->getRepository(Amis::class)->findBy([
+                'suiveur' =>$this->getUser(),
+                'suivi' =>$user
+            ]);
         }
 
         $originalImage = null;
@@ -71,7 +77,7 @@ class ProfilController extends AbstractController
             }
         }
 
-        return $this->render('profil/index.html.twig', ['user'=>$user,'formp'=>$form->createView()]);
+        return $this->render('profil/index.html.twig', ['user'=>$user,'formp'=>$form->createView(),'estami'=>$estami]);
     }
 
 

@@ -131,4 +131,33 @@ $(".delete-friend").click(function(e){
     );
 });
 
+$(".add-friend").click(function () {
+
+    var href=$(this).attr('data-href')
+    var bb=$(this);
+    $.get(
+        href,
+        function(response){
+           if(response=="Confirmation de suivi") {
+               bb.parent().append("<button class=\"btn btn-danger col-3 mx-2 del-friend\"><i class=\"fas fa-user-minus\"></i></button>")
+               bb.remove();
+           }
+        }
+    );
+});
+
+$(".del-friend").click(function(){
+
+    var href=$(this).attr('data-href');
+    var bb=$(this);
+    $.get(
+        href,
+        function(response){
+            if(response=="ok")
+            bb.parent().append("<button class=\"btn btn-primary col-3 mx-2 add-friend\"><i class=\"fas fa-user-plus\"></i></button>");
+            bb.remove();
+        }
+    );
+});
+
 
