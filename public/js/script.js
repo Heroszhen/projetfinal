@@ -180,24 +180,20 @@ $('.div-friend').on('click', ".add-friend", function(e){
         }
     );
 });
-//
-//
-//
-// $(".del-friend").click(function(){
-//
-//     var href=$(this).attr('data-href');
-//     var bb=$(this);
-//     var userid=$(this).attr('data-id');
-//     $.get(
-//         href,
-//         function(response){
-//             if(response=="ok")
-//             bb.parent().append("<button data-id='"+userid+"' class=\"btn btn-primary col-3 mx-2 add-friend\" data-href=\"{{ path('app_amis_follow', {'id': "+userid+"}) }}\">\n" + "<i class=\"fas fa-user-plus\"></i></button>");
-//             bb.remove();
-//         }
-//     );
-// });
-//
+
+$(".del-friend").click(function(e){
+
+    e.preventDefault();
+    var href= $(this).attr('href');
+    var ba = $(this);
+    $.get(
+        href,
+        function(response){
+            if(response=="ok")ba.parent().parent().remove();
+        }
+    );
+ });
+
 
 $(".showcomments").each(function(){
     $(this).click(function(e){
