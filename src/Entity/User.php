@@ -13,8 +13,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="il exsiste deja un utilisateur avec cet email")
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -531,5 +532,42 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+
+
+
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->prenom,
+            $this->nom,
+            $this->email,
+            $this->motdepasse
+
+
+        ));
+    }
+
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->prenom,
+            $this->nom,
+            $this->email,
+            $this->motdepasse
+            ) = unserialize($serialized);
     }
 }
