@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container row">
+    <div class="col-4">
+        <table class="table">
+        {% for user in users %}
+            <tr>
+            <p>{{ user.id }}</p>
+            <p><a href="{{ path('app_message_message', {'id': user.id}) }}" class="show-message">{{ user }}</a></p>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <div class="col-8">
+        <div id="message-utilisateur" data-link="" style="display: none">
+            <div class="card mt-4">
+                <div id="message-container" class="card-body" style="height :40em; overflow: auto">
+                </div>
+            </div>
+            <form id="form-message" class="mt-2">
+                <div class="row">
+                    <div class="form-group col-11">
+                        <input name="message" class="form-control" placeholder="votre message">
+                    </div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-primary" > Envoyer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {# reprend le contenu du block javascripts de base.html.twig#}
+    {{ parent() }}
+    <script src="{{ asset('js/tchat.js') }}"></script>
+{% endblock %}

@@ -33,9 +33,11 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-warning">
     <div class="container navbar-nav">
-        <a class="navbar-brand" href="#">
+        {% if app.user is not null %}
+        <a class="navbar-brand" href="{{ path("app_actu_index",{'id':user.id}) }}">
             Accueil
         </a>
+        {% endif %}
         <div class="navbar-collapse">
             <ul class="navbar-nav">
 
@@ -52,18 +54,55 @@
                         Mes Amis
                     </a>
                 </li>
+
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Projet de Zhen
+                    </a>
+                </li>
             </ul>
+    <nav class="navbar navbar-expand-md navbar-dark bg-warning">
+        <div class="container navbar-nav">
+            <a class="navbar-brand" href="#">
+                Accueil
+            </a>
+            <div class="navbar-collapse">
+                <ul class="navbar-nav">
+                   {# {% if app.user is not null %} #} {# Si l'utilisateur est connecté #}
+                    <li class="nav-item">
+                        <a class="nav-link" href="">
+                            Profil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">
+                            Amis
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_message_index') }}">
+                            Messages
+                        </a>
+                    </li>
+
+
+                </ul>
 
         </div>
 
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
-            <a class="btn btn-outline-light my-2 my-sm-0" href="">Rechercher</a>
+        {% if app.user is not null %} {# Si l'utilisateur est connecté #}
 
-
-
-
+       <form class="form-inline my-2 my-lg-0" id="fsearch" action="{{ path('app_recherche_recherche') }}" method="POST">
+            <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" name="recherchecontact">
+           <button type="submit" data-href="{{ path('app_recherche_recherche') }}" class="btn btn-outline-light my-2 my-sm-0 search-user">
+               Rechercher
+           </button>
+        </form>
         {% endif %}
+
+        </div>
+
     </div>
 </nav>
 

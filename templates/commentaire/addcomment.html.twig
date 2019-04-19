@@ -1,0 +1,15 @@
+<div>
+    <div class="dropdown">
+        <small>{{ date }}</small>
+        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-certificate"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button id="up{{ comment.id }}" class="dropdown-item" onclick="fupdate({{  comment.id }})">Modifier</button>
+            <boutton id="d{{ comment.id }}" class="dropdown-item delete-comment" onclick="fdelete({{ comment.id }})">Supprimer</boutton>
+        </div>
+    </div>
+    <div class="vignette"><img src="{{ image }}" alt='' width='50'></div>
+    <a href='{{ path("app_profil_index",{ "id":comment.auteur.id}) }}'>{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a><br>
+    <span>{{ comment.contenu }}</span> <br><br></div>
+</div>

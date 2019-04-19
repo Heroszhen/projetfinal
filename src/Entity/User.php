@@ -88,6 +88,11 @@ class User implements UserInterface
     private $messages;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="destinataire")
+     */
+    private $messagesRecus;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="user")
      * @ORM\OrderBy({"datePublication":"DESC"})
      */
@@ -108,6 +113,7 @@ class User implements UserInterface
         $this->articles = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->messages = new ArrayCollection();
+        $this->messagesRecus = new ArrayCollection();
 
         $this->photos = new ArrayCollection();
 
@@ -143,12 +149,6 @@ class User implements UserInterface
         $this->nom = $nom;
 
         return $this;
-    }
-
-
-    public function __toString()
-    {
-        return $this->prenom . ' ' . $this->nom;
     }
 
     public function getEmail(): ?string
@@ -340,6 +340,41 @@ class User implements UserInterface
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->prenom . ' ' . $this->nom;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessagesRecus(): Collection
+    {
+        return $this->messagesRecus;
+    }
+
+    public function addMessagesRecus(Message $messagesRecus): self
+    {
+        if (!$this->messagesRecus->contains($messagesRecus)) {
+            $this->messagesRecus[] = $messagesRecus;
+            $messagesRecus->setDestinataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesRecus(Message $messagesRecus): self
+    {
+        if ($this->messagesRecus->contains($messagesRecus)) {
+            $this->messagesRecus->removeElement($messagesRecus);
+            // set the owning side to null (unless already changed)
+            if ($messagesRecus->getDestinataire() === $this) {
+                $messagesRecus->setDestinataire(null);
+            }
+        }
+
+        return $this;
+    }
 
     /**
      * Returns the roles granted to the user.

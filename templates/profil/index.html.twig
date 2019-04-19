@@ -6,7 +6,7 @@
 
 
 
-    <div class="row justify-content-between">
+    <div class="row justify-content-around">
 
         {# COLONNE DE GAUCHE #}
 
@@ -56,10 +56,12 @@
                     <a href="{{ path('app_amis_index',{'id': user.id}) }}"> <i class="fas fa-user-friends"></i> Amis</a>
                 </h5>
                 <div class="row justify-content-between">
-                    <div class="col-12">
+                    <div class="col-6">
                         {% for ami in user.amis %}
                             <div class="vignette m-1">
-                                <img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="..." width="100%">
+                                <a href="{{ path('app_profil_index',{'id':ami.suivi.id}) }}">
+                                    <img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="..." width="100%">
+                                </a>
                             </div>
                         {% endfor %}
                     </div>
@@ -69,7 +71,7 @@
             <div class="mt-5">
                 <h5>
                     {#********* album photo**************** #}
-                    <a href="{{ path('app_photo_index') }}"> <i class="fas fa-camera-retro"></i> Album photo</a>
+                    <a href="{{ path('app_photo_index' , {'id': user.id}) }}"> <i class="fas fa-camera-retro"></i> Album photo</a>
                 </h5>
                 <div class="row justify-content-start">
                     <div class="col-6">
@@ -137,7 +139,7 @@
                             <div class="commentaires col-12 border-top border-dark pt-2 pb-2">
                                 <div class="commenter">
                                     <small><a class="showcomments btn btn-link" href="#">Commenter</a> :</small>
-                                    <form></form>
+
                                     <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
                                         <input type="text" name="commentaire">
                                         <input type="hidden">
@@ -165,7 +167,7 @@
                                                     <img src="{{ asset('images/' ~ comment.auteur.photo) }}" alt="" width="50">
                                                 {% endif %}
                                             </div>
-                                            <small><a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a> :</small>
+                                                <small><a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a> :</small>
                                             <br>
                                             <div class="text-justify row">
                                                 <small class="col-12">
