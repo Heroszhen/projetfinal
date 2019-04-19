@@ -6,7 +6,7 @@
 
 
 
-    <div class="row justify-content-between">
+    <div class="row justify-content-around">
 
         {# COLONNE DE GAUCHE #}
 
@@ -44,10 +44,12 @@
                     <a href="{{ path('app_amis_index',{'id': user.id}) }}"> <i class="fas fa-user-friends"></i> Amis</a>
                 </h5>
                 <div class="row justify-content-between">
-                    <div class="col-12">
+                    <div class="col-6">
                         {% for ami in user.amis %}
                             <div class="vignette m-1">
-                                <img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="..." width="100%">
+                                <a href="{{ path('app_profil_index',{'id':ami.suivi.id}) }}">
+                                    <img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="..." width="100%">
+                                </a>
                             </div>
                         {% endfor %}
                     </div>
