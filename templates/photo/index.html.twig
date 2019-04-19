@@ -27,7 +27,7 @@
     <h3 class="text-center"><em>Les photos({{ photos|length }})</em></h3>
 
     <div class="text-center">
-        <strong> {{ user.prenom }} {{ user.nom }}</strong>
+        <a href="{{ path('app_profil_index',{'id':user.id}) }}"><strong> {{ user.prenom }} {{ user.nom }}</strong></a>
     </div>
     <div class="row justify-content-start mt-5">
         {% for photo in photos  %}

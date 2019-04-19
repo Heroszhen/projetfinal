@@ -44,10 +44,12 @@
                     <a href="{{ path('app_amis_index',{'id': user.id}) }}"> <i class="fas fa-user-friends"></i> Amis</a>
                 </h5>
                 <div class="row justify-content-between">
-                    <div class="col-12">
+                    <div class="col-6">
                         {% for ami in user.amis %}
                             <div class="vignette m-1">
-                                <img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="..." width="100%">
+                                <a href="{{ path('app_profil_index',{'id':ami.suivi.id}) }}">
+                                    <img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="..." width="100%">
+                                </a>
                             </div>
                         {% endfor %}
                     </div>
@@ -76,6 +78,9 @@
 
 
         <div class="col-md-7">
+
+
+            <iframe class="mt-5" width="560" height="315" src="https://www.youtube.com/embed/0EYSE2WHXNY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
             {# Les publications(articles) #}
             <div class="mt-5">
