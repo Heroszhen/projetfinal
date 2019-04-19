@@ -33,7 +33,11 @@ class CommentaireController extends AbstractController
         $photo = $commentaire->getAuteur()->getPhoto();
         $image = (is_null($photo))?"http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg":"{{asset('images/' ~ ".$photo.") }}";
 
-        $r = "<div><div class=\"dropdown\"><small>À ".$commentaire->getDatePublication()->format('H:i d/m/Y')."</small><button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class=\"fas fa-certificate\"></i></button><div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\"><button id='up".$commentaire->getId()."' class=\"dropdown-item\" onclick='fupdate(".$commentaire->getId().")'>Modifier</button><boutton id='d".$commentaire->getId()."' class=\"dropdown-item delete-comment\" onclick='fdelete(".$commentaire->getId().")'>Supprimer</boutton></div></div><div class=\"vignette\"><img src=".$image." alt=''></div>&nbsp;&nbsp;&nbsp;<a href='{{ path(\"app_profil_index\",{ \"id\":response.id}) }}'>".$commentaire->getAuteur()->getPrenom()." ".$commentaire->getAuteur()->getNom()."</a><br> <span>".$commentaire->getContenu()."</span> <br><br></div>";
+        $r = "<div><div class=\"dropdown\"><small>À ".$commentaire->getDatePublication()->format('H:i d/m/Y')."</small>
+            <button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><i class=\"fas fa-certificate\"></i></button><div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
+            <button id='up".$commentaire->getId()."' class=\"dropdown-item\" onclick='fupdate(".$commentaire->getId().")'>Modifier</button>
+            <boutton id='d".$commentaire->getId()."' class=\"dropdown-item delete-comment\" onclick='fdelete(".$commentaire->getId().")'>Supprimer</boutton></div></div><div class=\"vignette\"><img src=".$image." alt=''></div>&nbsp;&nbsp;&nbsp;
+            <a href='{{ path(\"app_profil_index\",{ \"id\":response.id}) }}'>".$commentaire->getAuteur()->getPrenom()." ".$commentaire->getAuteur()->getNom()."</a><br> <span>".$commentaire->getContenu()."</span> <br><br></div>";
         return new Response($r);
     }
 
