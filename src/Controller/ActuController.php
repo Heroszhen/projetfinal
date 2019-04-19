@@ -18,8 +18,12 @@ class ActuController extends AbstractController
     /**
      * @Route("/{id}")
      */
-    public function index(User $user, Request $request)
+    public function index(User $user)
     {
+        $repository = $this->getDoctrine()->getRepository(Article::class);
+
+        dump($user->getAmis()->co);
+        //$articles = $repository->findAll(["auteur"=>$user->getAmis()->]);
         return $this->render('actu/index.html.twig', [
             'controller_name' => 'ActuController',
         ]);
