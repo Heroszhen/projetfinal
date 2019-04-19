@@ -88,6 +88,11 @@ class User implements UserInterface
     private $messages;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Message", mappedBy="destinataire")
+     */
+    private $messagesRecus;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="user")
      * @ORM\OrderBy({"datePublication":"DESC"})
      */
@@ -98,16 +103,22 @@ class User implements UserInterface
      */
     private $amis;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Amis", mappedBy="suivi")
+     */
+    private $amisSuivi;
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->messages = new ArrayCollection();
+        $this->messagesRecus = new ArrayCollection();
 
         $this->photos = new ArrayCollection();
 
         $this->amis = new ArrayCollection();
+        $this->amisSuivi = new ArrayCollection();
 
     }
 
@@ -138,12 +149,6 @@ class User implements UserInterface
         $this->nom = $nom;
 
         return $this;
-    }
-
-
-    public function __toString()
-    {
-        return $this->prenom . ' ' . $this->nom;
     }
 
     public function getEmail(): ?string
@@ -335,6 +340,41 @@ class User implements UserInterface
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->prenom . ' ' . $this->nom;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessagesRecus(): Collection
+    {
+        return $this->messagesRecus;
+    }
+
+    public function addMessagesRecus(Message $messagesRecus): self
+    {
+        if (!$this->messagesRecus->contains($messagesRecus)) {
+            $this->messagesRecus[] = $messagesRecus;
+            $messagesRecus->setDestinataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesRecus(Message $messagesRecus): self
+    {
+        if ($this->messagesRecus->contains($messagesRecus)) {
+            $this->messagesRecus->removeElement($messagesRecus);
+            // set the owning side to null (unless already changed)
+            if ($messagesRecus->getDestinataire() === $this) {
+                $messagesRecus->setDestinataire(null);
+            }
+        }
+
+        return $this;
+    }
 
     /**
      * Returns the roles granted to the user.
@@ -416,6 +456,20 @@ class User implements UserInterface
             $photo->setUser($this);
         }
     }
+
+
+
+    public function removePhoto(Photo $photo): self
+    {
+        if ($this->photos->contains($photo)) {
+            $this->photos->removeElement($photo);
+            // set the owning side to null (unless already changed)
+            if ($photo->getUser() === $this) {
+                $photo->setUser(null);
+            }
+        }
+    }
+
     /**
      * @return Collection|Amis[]
      */
@@ -435,18 +489,6 @@ class User implements UserInterface
         return $this;
     }
 
-
-    public function removePhoto(Photo $photo): self
-    {
-        if ($this->photos->contains($photo)) {
-            $this->photos->removeElement($photo);
-            // set the owning side to null (unless already changed)
-            if ($photo->getUser() === $this) {
-                $photo->setUser(null);
-            }
-        }
-    }
-
     public function removeAmi(Amis $ami): self
     {
         if ($this->amis->contains($ami)) {
@@ -454,6 +496,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($ami->getSuiveur() === $this) {
                 $ami->setSuiveur(null);
+
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAmisSuivi(): Collection
+    {
+        return $this->amisSuivi;
+    }
+
+    public function addAmiSuivi(Amis $ami): self
+    {
+        if (!$this->amisSuivi->contains($ami)) {
+            $this->amisSuivi[] = $ami;
+            $ami->setSuivi($this);
+
+        }
+
+        return $this;
+    }
+
+    public function removeAmiSuivi(Amis $ami): self
+    {
+        if ($this->amisSuivi->contains($ami)) {
+            $this->amisSuivi->removeElement($ami);
+            // set the owning side to null (unless already changed)
+            if ($ami->getSuivi() === $this) {
+                $ami->setSuivi(null);
 
             }
         }

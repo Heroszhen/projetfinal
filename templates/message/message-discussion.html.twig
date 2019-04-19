@@ -1,0 +1,9 @@
+
+    {% for message in messages  %}
+        <div>
+        {{ message.contenu }}
+        {{ message.datePublication|date('d/m/Y H:i:s') }}
+        </div><br>
+    {% endfor %}
+
+
