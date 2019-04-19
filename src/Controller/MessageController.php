@@ -21,8 +21,9 @@ class MessageController extends AbstractController
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
-        $repository = $this->getDoctrine()->getRepository(Message::class);
-        $users = $repository->findBy([], ['auteur' => 'DESC']);
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $users = $repository->findBy([], ['id' => 'ASC']);
+        $hasUser = $this->getUser();
 
 
         return $this->render(
@@ -36,14 +37,14 @@ class MessageController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/user/{id}")
      */
-    public function messaqe(User $user)
+    public function message(User $user)
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository(Message::class);
         $messages = $repository->search($this->getUser(), $user);
 
         return $this->render(
-            'message/index.html.twig',
+            'message/message-discussion.html.twig',
             [
                 'messages' => $messages,
             ]);

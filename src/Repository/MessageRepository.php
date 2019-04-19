@@ -55,13 +55,11 @@ class MessageRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('m');
 
         // tri par date de publication croissante
-        $qb->orderBy('m.publicationDate', 'ASC');
+        $qb->orderBy('m.datePublication', 'ASC');
 
         $qb
-            ->orWhere('m.auteur :user1')
-            ->orWhere('m.auteur :user2')
-            ->orWhere('m.destinataire :user1')
-            ->orWhere('m.destinataire :user2')
+            ->orWhere('m.auteur = :user1 AND m.destinataire = :user2')
+            ->orWhere('m.auteur = :user2 AND m.destinataire = :user1')
             ->setParameter('user1', $user1)
             ->setParameter('user2', $user2)
         ;
