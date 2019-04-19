@@ -12,10 +12,29 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 
 /**
- * @Route("/accueil")
+ * @Route("/")
  */
 class AccueilController extends AbstractController
 {
+    /**
+     * @Route("/")
+     */
+    public function index(Request $request)
+    {
+        $user = new User();
+
+        $form = $this->createForm(InscriptionType::class, $user);
+
+        $form->handleRequest($request);
+
+
+        return $this->render('accueil/index.html.twig',
+                [
+                    'form' => $form->createView()
+                ]
+            );
+    }
+
     /**
      * @Route("/inscription")
      */
@@ -26,7 +45,6 @@ class AccueilController extends AbstractController
 
         $user = new User();
         $form = $this->createForm(InscriptionType::class, $user);
-
         $form->handleRequest($request);
 
 
@@ -46,7 +64,7 @@ class AccueilController extends AbstractController
                 $em->persist($user);
                 $em->flush();
 
-                $this->addFlash('success','Votre compte a été créé avec succés !');
+                $this->addFlash('success','Votre compte a été créé avec succès !');
 
                 return $this->redirectToRoute('app_accueil_connexion');
             }else{
@@ -55,7 +73,7 @@ class AccueilController extends AbstractController
         }
 
 
-        return $this->render('accueil/index.html.twig',
+        return $this->render('accueil/inscription.html.twig',
             [
                 'form' => $form->createView()
             ]

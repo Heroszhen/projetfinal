@@ -1,20 +1,120 @@
+body{
+    background-image: url("/images/wallpaper.jpg");
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+.transparence{
+    background: rgba(255, 255, 255, 0.9);
+    min-height: 100vh;
+}
+
 #navbar{
     background-color: #004683 !important;
 }
-h1.grostitre{
-    font-family: "Arial Black";
+
+.bg-primary{
+    background-color: #004683;
+}
+.btn-primary{
+    background-color: #004683;
+}
+
+.profilphoto{
+    width: 250px;
+    text-align: center;
 }
 
 .imgprofil{
-    width: 200px;
-    height: 250px;
-    border: black 1px solid;
+    max-height: 250px;
+    max-width: 250px;
+    overflow: hidden;
+    -webkit-box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
+    box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
 }
-
+.danger{
+    color: red;
+}
 
 .vignette{
     width: 50px;
     height: 50px;
-    border: black 1px solid;
     display: inline-flex;
+    -webkit-box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
+    box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
+}
+.vignette:hover{
+    -webkit-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
+    box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
+}
+
+.photos{
+    max-width: 200px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-album{
+    max-width: 200px;
+    -webkit-box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
+    box-shadow: 2px -5px 40px -9px rgba(0,0,0,0.75);
+}
+
+.img-album:hover{
+    -webkit-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
+    box-shadow: 11px 11px 24px -9px rgba(0,0,0,0.75);
+}
+
+.actu{
+    max-width: 100vh;
+    min-height: 10vh;
+    background-color: white;
+}
+
+.publication{
+    text-align: justify;
+    padding: 0 20px;
+}
+
+.commentaire{
+    width: 50vh;
+    min-height: 10vh;
+    border: black 1px solid;
+    border-radius: 50px;
+    background-color: white;
+    padding: 10px 20px;
+    margin: 40px auto 0;
+
+}
+/*************************************La page photo**************************************************************/
+/* passage de la souris
+img.zoom{
+    cursor: zoom-in;
+}
+img.zoom:hover{
+    transform: scale(2);
+
+}*/
+.imgEffets img{
+    z-index: 1; /*DE base*/
+    height: 150px;
+    box-shadow: 0 0 3px black;
+    transition: 0.5s cubic-bezier(0,3,.4,1);
+}
+.imgEffets img:hover { /*quand je survol les li l'image qui bouge*/
+    z-index: 2; /* QUAND JE SURVOL l'image , il vient en dessus des auyres*/
+    transform: scale(2);
+    box-shadow: 0 0 10px black;
+    /*filter: grayscale(2) blur(20px);*/
+}
+.imgEffets:hover img:not(:hover){ /* concerne que li qui est survolé (img)*/
+    filter: grayscale(1) blur(10px); /* grayscale: convertie votre image en nuances de gris et blur applique un flou*/
+
 }
