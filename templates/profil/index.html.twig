@@ -21,19 +21,27 @@
 
             <div class="row justify-content-start div-friend">
                 {% if app.user is not null %}
+                {% if user != app.user %}
                     <button data-id="{{ user.id }}"
                             class="btn btn-danger col-3 mx-2 delete-friend"
                             data-href="{{ path('app_amis_unfollow', {'id': user.id}) }} "
-                    {% if estami|length == 0 %}style="display: none"{% endif %}>
+
+                            {% if estami|length == 0 %}style="display: none"{% endif %}>
                         <i class="fas fa-user-minus"></i>
                     </button>
+
 
                     <button data-id="{{ user.id }}"
                             class="btn btn-primary col-3 mx-2 add-friend"
                             data-href="{{ path('app_amis_follow', {'id': user.id}) }}"
-                    {% if estami|length != 0 and app.user != user %}style="display: none"{% endif %}>
-                    <i class="fas fa-user-plus"></i></button>
+                    {% if estami|length != 0 and app.user != user %}
+                        style="display: none"
+                            {% endif %}>
+                    <i class="fas fa-user-plus"></i>
+                    </button>
+                    {% endif %}
                 {% endif %}
+
             </div>
 
             <div class="bio mt-5">
@@ -58,9 +66,9 @@
                 <div class="row justify-content-between">
                     <div class="col-6">
                         {% for ami in user.amis %}
-                            <div class="vignette m-1">
+                            <div class="listevignette m-1">
                                 <a href="{{ path('app_profil_index',{'id':ami.suivi.id}) }}">
-                                    <img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="..." width="100%">
+                                    <img class="vignette" src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="{{ ami.suivi.prenom }} {{ ami.suivi.nom }}" width="100%">
                                 </a>
                             </div>
                         {% endfor %}
@@ -76,8 +84,8 @@
                 <div class="row justify-content-start">
                     <div class="col-6">
                         {% for photo in user.photos  %}
-                            <div class="vignette m-1">
-                                <img src="{{ asset('images/' ~ photo.image) }}" alt="..." width="100%">
+                            <div class="listevignette m-1">
+                                <img class="vignette" src="{{ asset('images/' ~ photo.image) }}" alt="..." width="100%">
                             </div>
                         {% endfor %}
                     </div>
@@ -91,6 +99,9 @@
 
         <div class="col-md-7">
 
+
+            <img class="mt-5 rounded-lg" src="https://blog.interflora.fr/wp-content/uploads/2016/05/Entretien-bouquet-de-fleurs.jpg" alt="">
+
             {# Les publications(articles) #}
             <div class="mt-5">
                 <div class="container" id="articles">
@@ -103,7 +114,7 @@
                     <br>
                     {% endif %}
                     {% for article in user.articles %}
-                        <div class="row mb-4 border border-dark pt-2 rounded actu" id="article{{ article.id }}">
+                        <div class="row mb-4 border border-secondary pt-2 rounded actu" id="article{{ article.id }}">
                             <div class="col-6">
                                 {% if article.auteur.photo is null %}
                                     <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50">
@@ -126,7 +137,7 @@
                                     </div>
                                 </div>
                             {% endif %}
-                            <div class="col-12 contenu py-3 px-3 text-justify">
+                            <div class="col-12 contenu p-3 text-justify">
                                 {{ article.contenu }}
                             </div>
                             <div class="col-12 image pb-3 text-center">
