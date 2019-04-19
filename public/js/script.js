@@ -153,8 +153,36 @@ function fcommentaire2(id) {
     })
 }
 
+$('.div-friend').on('click', ".delete-friend", function(e){
+//$(".delete-friend").click(function(e){
+    e.preventDefault();
+    var href= $('.delete-friend').attr('data-href');
+    console.log(href);
+    $.get(
+        href,
+        function(response){
+            $('.delete-friend').hide();
+            $('.add-friend').show();
+        }
+    );
+});
 
-$(".delete-friend").click(function(e){
+$('.div-friend').on('click', ".add-friend", function(e){
+//$(".add-friend").click(function () {
+
+    var href=$('.add-friend').attr('data-href');
+    console.log(href);
+    $.get(
+        href,
+        function(response){
+           $('.delete-friend').show();
+           $('.add-friend').hide();
+        }
+    );
+});
+
+$(".del-friend").click(function(e){
+
     e.preventDefault();
     var href= $(this).attr('href');
     var ba = $(this);
@@ -164,7 +192,7 @@ $(".delete-friend").click(function(e){
             if(response=="ok")ba.parent().parent().remove();
         }
     );
-});
+ });
 
 
 $(".showcomments").each(function(){
