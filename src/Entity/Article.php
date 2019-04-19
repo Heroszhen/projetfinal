@@ -30,7 +30,7 @@ class Article
     private $datePublication;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
 
@@ -41,7 +41,8 @@ class Article
     private $auteur;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="article",cascade={"remove"})
+     * @ORM\OrderBy({"datePublication":"DESC"})
      */
     private $commentaires;
 
@@ -80,12 +81,12 @@ class Article
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getImage()
     {
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage($image): self
     {
         $this->image = $image;
 
@@ -107,12 +108,12 @@ class Article
     /**
      * @return Collection|Commentaire[]
      */
-    public function getCommentaires(): Collection
+    public function getCommentaires(): ?Collection
     {
         return $this->commentaires;
     }
 
-    public function addCommentaire(Commentaire $commentaire): self
+    public function addCommentaire(?Commentaire $commentaire): self
     {
         if (!$this->commentaires->contains($commentaire)) {
             $this->commentaires[] = $commentaire;

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma liste d'amis{% endblock %}
+
+{% block body %}
+
+    <h1 class="mt-2">Liste d'amis de {{ user.prenom }} {{ user.nom }}</h1>
+
+    <table class="table table-striped mt-5">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+     {% for ami in user.amis %}
+        <tr>
+            <td><a href="{{ path('app_profil_index',{'id':ami.suivi.id}) }}"><img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="{{ ami.suivi.prenom }}" width="100"></a></td>
+            <td><a href="{{ path('app_profil_index',{'id':ami.suivi.id}) }}">{{ ami.suivi.prenom }}</a></td>
+            <td><a href="{{ path('app_profil_index',{'id':ami.suivi.id}) }}">{{ ami.suivi.nom }}</a></td>
+
+
+            <td>
+                <a href="{{ path('app_amis_unfollow', {'id': ami.id}) }}" class="delete-friend">
+                    <i class="fas fa-user-minus"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

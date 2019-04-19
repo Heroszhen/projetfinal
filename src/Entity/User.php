@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"email"}, message="il exsiste deja un utilisateur avec cet email")
  */
 class User implements UserInterface
 {
@@ -71,6 +73,7 @@ class User implements UserInterface
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="auteur")
+     * @ORM\OrderBy({"datePublication":"DESC"})
      */
     private $articles;
 
@@ -89,12 +92,29 @@ class User implements UserInterface
      */
     private $messagesRecus;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Photo", mappedBy="user")
+     * @ORM\OrderBy({"datePublication":"DESC"})
+     */
+    private $photos;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Amis", mappedBy="suiveur")
+     */
+    private $amis;
+
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->commentaires = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->messagesRecus = new ArrayCollection();
+
+        $this->photos = new ArrayCollection();
+
+        $this->amis = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -126,6 +146,12 @@ class User implements UserInterface
         return $this;
     }
 
+
+    public function __toString()
+    {
+        return $this->prenom . ' ' . $this->nom;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -150,12 +176,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPhoto(): ?string
+    public function getPhoto()
     {
         return $this->photo;
     }
 
-    public function setPhoto(?string $photo): self
+    public function setPhoto($photo): self
     {
         $this->photo = $photo;
 
@@ -414,5 +440,65 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @return Collection|Photo[]
+     */
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    public function addPhoto(Photo $photo): self
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos[] = $photo;
+            $photo->setUser($this);
+        }
+    }
+    /**
+     * @return Collection|Amis[]
+     */
+    public function getAmis(): Collection
+    {
+        return $this->amis;
+    }
+
+    public function addAmi(Amis $ami): self
+    {
+        if (!$this->amis->contains($ami)) {
+            $this->amis[] = $ami;
+            $ami->setSuiveur($this);
+
+        }
+
+        return $this;
+    }
+
+
+    public function removePhoto(Photo $photo): self
+    {
+        if ($this->photos->contains($photo)) {
+            $this->photos->removeElement($photo);
+            // set the owning side to null (unless already changed)
+            if ($photo->getUser() === $this) {
+                $photo->setUser(null);
+            }
+        }
+    }
+
+    public function removeAmi(Amis $ami): self
+    {
+        if ($this->amis->contains($ami)) {
+            $this->amis->removeElement($ami);
+            // set the owning side to null (unless already changed)
+            if ($ami->getSuiveur() === $this) {
+                $ami->setSuiveur(null);
+
+            }
+        }
+
+        return $this;
     }
 }

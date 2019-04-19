@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+    <h2 class="text-center mt-3"><em>Liste de résultats</em></h2>
+    {% if users is not null %}
+        <div class="mt-5">
+            {% for user in users %}
+                <ul>
+                    <li>
+                        <a href="{{ path('app_profil_index', {'id': user.id}) }}"
+                           class="badge badge-light" style="font-size: large">
+                            {{ user.prenom }} {{ user.nom }}
+                        </a><br>
+                    </li>
+                </ul>
+            {% else %}
+                <p>Aucun resultat trouvé</p>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+{% endblock %}
