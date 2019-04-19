@@ -17,13 +17,13 @@ class Amis
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="amis")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="amis")
      * @ORM\JoinColumn(nullable=false)
      */
     private $suiveur;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="amis")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="amisSuivi")
      * @ORM\JoinColumn(nullable=false)
      */
     private $suivi;

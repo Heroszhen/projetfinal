@@ -48,13 +48,13 @@ class AmisController extends AbstractController
     /**
      * @Route("/delete/{id}")
      */
-    public function unfollow(Amis $amis)
+    public function unfollow(User $amis)
     {
 
         $em = $this->getDoctrine()->getManager();
+    $ami = $em->getRepository(Amis::class)->findOneBy(['suivi'=>$amis]);
 
-
-            $em->remove($amis);
+            $em->remove($ami);
             $em->flush();
 
 

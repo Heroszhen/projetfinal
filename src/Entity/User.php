@@ -98,6 +98,10 @@ class User implements UserInterface
      */
     private $amis;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Amis", mappedBy="suivi")
+     */
+    private $amisSuivi;
 
     public function __construct()
     {
@@ -108,6 +112,7 @@ class User implements UserInterface
         $this->photos = new ArrayCollection();
 
         $this->amis = new ArrayCollection();
+        $this->amisSuivi = new ArrayCollection();
 
     }
 
@@ -416,6 +421,20 @@ class User implements UserInterface
             $photo->setUser($this);
         }
     }
+
+
+
+    public function removePhoto(Photo $photo): self
+    {
+        if ($this->photos->contains($photo)) {
+            $this->photos->removeElement($photo);
+            // set the owning side to null (unless already changed)
+            if ($photo->getUser() === $this) {
+                $photo->setUser(null);
+            }
+        }
+    }
+
     /**
      * @return Collection|Amis[]
      */
@@ -435,18 +454,6 @@ class User implements UserInterface
         return $this;
     }
 
-
-    public function removePhoto(Photo $photo): self
-    {
-        if ($this->photos->contains($photo)) {
-            $this->photos->removeElement($photo);
-            // set the owning side to null (unless already changed)
-            if ($photo->getUser() === $this) {
-                $photo->setUser(null);
-            }
-        }
-    }
-
     public function removeAmi(Amis $ami): self
     {
         if ($this->amis->contains($ami)) {
@@ -454,6 +461,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($ami->getSuiveur() === $this) {
                 $ami->setSuiveur(null);
+
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAmisSuivi(): Collection
+    {
+        return $this->amisSuivi;
+    }
+
+    public function addAmiSuivi(Amis $ami): self
+    {
+        if (!$this->amisSuivi->contains($ami)) {
+            $this->amisSuivi[] = $ami;
+            $ami->setSuivi($this);
+
+        }
+
+        return $this;
+    }
+
+    public function removeAmiSuivi(Amis $ami): self
+    {
+        if ($this->amisSuivi->contains($ami)) {
+            $this->amisSuivi->removeElement($ami);
+            // set the owning side to null (unless already changed)
+            if ($ami->getSuivi() === $this) {
+                $ami->setSuivi(null);
 
             }
         }

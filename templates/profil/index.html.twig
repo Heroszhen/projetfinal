@@ -19,17 +19,20 @@
             </div>
             <br>
 
-            <div class="row justify-content-start">
+            <div class="row justify-content-start div-friend">
                 {% if app.user is not null %}
-                    {% if estami|length!=0 %}
-                        <button class="btn btn-danger col-3 mx-2 del-friend" data-href="{{ path('app_amis_unfollow', {'id': user.id}) }}" >
-                            <i class="fas fa-user-minus"></i></button>
-                    {% else %}
-                        {% if app.user != user %}
-                            <button class="btn btn-primary col-3 mx-2 add-friend" data-href="{{ path('app_amis_follow', {'id': user.id}) }}">
-                            <i class="fas fa-user-plus"></i></button>
-                        {% endif %}
-                    {% endif %}
+                    <button data-id="{{ user.id }}"
+                            class="btn btn-danger col-3 mx-2 delete-friend"
+                            data-href="{{ path('app_amis_unfollow', {'id': user.id}) }} "
+                    {% if estami|length == 0 %}style="display: none"{% endif %}>
+                        <i class="fas fa-user-minus"></i>
+                    </button>
+
+                    <button data-id="{{ user.id }}"
+                            class="btn btn-primary col-3 mx-2 add-friend"
+                            data-href="{{ path('app_amis_follow', {'id': user.id}) }}"
+                    {% if estami|length != 0 and app.user != user %}style="display: none"{% endif %}>
+                    <i class="fas fa-user-plus"></i></button>
                 {% endif %}
             </div>
 

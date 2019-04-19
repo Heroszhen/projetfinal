@@ -148,48 +148,51 @@ function fcommentaire2(id) {
     })
 }
 
-
-$(".delete-friend").click(function(e){
+$('.div-friend').on('click', ".delete-friend", function(e){
+//$(".delete-friend").click(function(e){
     e.preventDefault();
-    var href= $(this).attr('href');
-    var ba = $(this);
+    var href= $('.delete-friend').attr('data-href');
+    console.log(href);
     $.get(
         href,
         function(response){
-            if(response=="ok")ba.parent().parent().remove();
+            $('.delete-friend').hide();
+            $('.add-friend').show();
         }
     );
 });
 
-$(".add-friend").click(function () {
+$('.div-friend').on('click', ".add-friend", function(e){
+//$(".add-friend").click(function () {
 
-    var href=$(this).attr('data-href')
-    var bb=$(this);
+    var href=$('.add-friend').attr('data-href');
+    console.log(href);
     $.get(
         href,
         function(response){
-           if(response=="Confirmation de suivi") {
-               bb.parent().append("<button class=\"btn btn-danger col-3 mx-2 del-friend\"><i class=\"fas fa-user-minus\"></i></button>")
-               bb.remove();
-           }
+           $('.delete-friend').show();
+           $('.add-friend').hide();
         }
     );
 });
-
-$(".del-friend").click(function(){
-
-    var href=$(this).attr('data-href');
-    var bb=$(this);
-    $.get(
-        href,
-        function(response){
-            if(response=="ok")
-            bb.parent().append("<button class=\"btn btn-primary col-3 mx-2 add-friend\"><i class=\"fas fa-user-plus\"></i></button>");
-            bb.remove();
-        }
-    );
-});
-
+//
+//
+//
+// $(".del-friend").click(function(){
+//
+//     var href=$(this).attr('data-href');
+//     var bb=$(this);
+//     var userid=$(this).attr('data-id');
+//     $.get(
+//         href,
+//         function(response){
+//             if(response=="ok")
+//             bb.parent().append("<button data-id='"+userid+"' class=\"btn btn-primary col-3 mx-2 add-friend\" data-href=\"{{ path('app_amis_follow', {'id': "+userid+"}) }}\">\n" + "<i class=\"fas fa-user-plus\"></i></button>");
+//             bb.remove();
+//         }
+//     );
+// });
+//
 
 $(".showcomments").each(function(){
     $(this).click(function(e){
