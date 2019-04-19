@@ -8,10 +8,11 @@
     {% if users is not null %}
         <div class="mt-5">
             {% for user in users %}
-                <ul>
-                    <li>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="{{ path('app_profil_index',{'id':user.id}) }}"><img src="{{ asset('images/' ~ user.photo) }}" alt="" width="100"></a>
                         <a href="{{ path('app_profil_index', {'id': user.id}) }}"
-                           class="badge badge-light" style="font-size: large">
+                           class="" style="font-size: large">
                             {{ user.prenom }} {{ user.nom }}
                         </a><br>
                     </li>

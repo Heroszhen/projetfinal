@@ -46,7 +46,7 @@ class PhotoController extends AbstractController
                  * @var UploadedFile $image
                  */
                 $image = $photo->getImage();
-                // s'il y a eu une image uploadee
+                // s'il y a eu une image uploadée
                 if(!is_null($image)) {
                     // nom sous lequel on va enregistrer l'image
                     $filename = uniqid() . '.' . $image->guessExtension();
@@ -113,11 +113,11 @@ class PhotoController extends AbstractController
         //suppression de la bdd
         $em->remove($photo);
         $em->flush();
-        
+
         // en modification on supprime l'ancienne image
         // s'il y en a une
         if(!is_null($photo)){
-           unlink($this->getParameter('upload_dir') . $photo->getImage());
+            unlink($this->getParameter('upload_dir') . $photo->getImage());
         }
 
         $this->addFlash('success', 'la photo est supprimée',
