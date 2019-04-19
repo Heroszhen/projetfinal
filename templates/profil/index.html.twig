@@ -20,7 +20,7 @@
             <br>
 
             <div class="row justify-content-start div-friend">
-                {% if app.user is not null %}
+                {% if (app.user is not null) and (app.user != user) %}
                     <button data-id="{{ user.id }}"
                             class="btn btn-danger col-3 mx-2 delete-friend"
                             data-href="{{ path('app_amis_unfollow', {'id': user.id}) }} "

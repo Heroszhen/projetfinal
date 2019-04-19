@@ -16,16 +16,29 @@ use Symfony\Component\Routing\Annotation\Route;
 class ActuController extends AbstractController
 {
     /**
-     * @Route("/{id}")
+     * @Route("/")
      */
-    public function index(User $user)
+    public function index()
     {
         $repository = $this->getDoctrine()->getRepository(Article::class);
+        //$articles = [];
+//        $amis = $user->getAmis();
+//        foreach ($amis as $ami) {
+//            dump($ami->getSuivi());
+//            $articles[]= $ami->getSuivi()->getArticles();
+//            foreach($articles as $article) {
+//                //dump();
+//            }
+//        }
 
-        dump($user->getAmis()->co);
+        $articles = $repository->getByUserFriends($this->getUser());
+        /*
+        foreach($articles as $article){
+            dump($article->);
+        }*/
         //$articles = $repository->findAll(["auteur"=>$user->getAmis()->]);
         return $this->render('actu/index.html.twig', [
-            'controller_name' => 'ActuController',
+            'articles' => $articles
         ]);
     }
 }
