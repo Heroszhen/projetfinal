@@ -20,7 +20,7 @@ class RechercheController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(User::class);
 
         //la methode search dans UserRepository
-        $users = $repository->search($request->request->get("nom"));
+        $users = $repository->search($request->request->get("recherchecontact"));
 
         return $this->render('recherche/index.html.twig',
         [

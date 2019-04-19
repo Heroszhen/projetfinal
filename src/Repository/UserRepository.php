@@ -24,13 +24,15 @@ class UserRepository extends ServiceEntityRepository
      * @return User[]
      *
      */
-    public function search(string $filters = null)
+    public function search(string $filter = null)
     {
-        dump($filters);
+        dump($filter);
 
         // constructeur de requete sql
         //le 'u' est l'alias de la table user dans la requete
         $qb = $this->createQueryBuilder('u');
+
+        $expr = $qb->expr();
 
         //tri par nom decroissant
         $qb->orderBy('u.nom', 'DESC');
@@ -38,8 +40,11 @@ class UserRepository extends ServiceEntityRepository
         //filters de nom
 
             $qb
-                ->andWhere('u.nom LIKE :nom')
-                ->setParameter('nom', '%'. $filters . '%')
+                ->orWhere('u.nom LIKE :filter')
+                ->orWhere('u.prenom LIKE :filter')
+                ->orWhere($expr->concat('u.prenom', $expr->concat($expr->literal(' '), 'u.nom')) . 'LIKE :filter')
+                ->orWhere($expr->concat('u.nom', $expr->concat($expr->literal(' '), 'u.prenom')) . 'LIKE :filter')
+                ->setParameter('filter', '%'. $filter . '%')
             ;
 
 
