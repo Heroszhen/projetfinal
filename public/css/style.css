@@ -7,7 +7,6 @@ body{
 .transparence{
     background: rgba(255, 255, 255, 0.9);
     min-height: 100vh;
-    min-width: 100vh;
 }
 
 #navbar{

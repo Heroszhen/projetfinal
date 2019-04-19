@@ -52,10 +52,18 @@
                         Mes Amis
                     </a>
                 </li>
+
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Projet de Zhen
+                    </a>
+                </li>
             </ul>
 
         </div>
 
+        {% if app.user is not null %} {# Si l'utilisateur est connecté #}
 
        <form class="form-inline my-2 my-lg-0" id="fsearch" action="{{ path('app_recherche_recherche') }}" method="POST">
             <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" name="recherchecontact">
@@ -63,10 +71,10 @@
                Rechercher
            </button>
         </form>
-
-
-
         {% endif %}
+
+
+
     </div>
 </nav>
 
