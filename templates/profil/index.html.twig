@@ -98,6 +98,7 @@
 
 
         <div class="col-md-7">
+            <img class="mt-5 rounded-lg img-fluid" src="https://blog.interflora.fr/wp-content/uploads/2016/05/Entretien-bouquet-de-fleurs.jpg" alt="">
 
 
             <img class="mt-5 rounded-lg" src="https://blog.interflora.fr/wp-content/uploads/2016/05/Entretien-bouquet-de-fleurs.jpg" alt="">
@@ -117,11 +118,11 @@
                         <div class="row mb-4 border border-secondary pt-2 rounded actu" id="article{{ article.id }}">
                             <div class="col-6">
                                 {% if article.auteur.photo is null %}
-                                    <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50">
+                                    <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="" width="50" height="50">
                                 {% else %}
-                                    <img src="{{ asset('images/' ~ article.auteur.photo) }}" alt="" width="50" class="mr-2">
+                                    <img src="{{ asset('images/' ~ article.auteur.photo) }}" alt="" width="50" height="50" class="mr-2">
                                 {% endif %}
-                                <a href="#">{{ article.auteur.prenom }} {{ article.auteur.nom }}</a>
+                                <a href="{{ path('app_profil_index',{'id':article.auteur.id}) }}">{{ article.auteur.prenom }} {{ article.auteur.nom }}</a>
                                 <br>
                                 à <em>{{ article.datePublication | date('h:m d/m/Y') }}</em>
                             </div>
@@ -142,7 +143,7 @@
                             </div>
                             <div class="col-12 image pb-3 text-center">
                                 {% if article.image is not null %}
-                                    <img src="{{  asset('images/' ~ article.image) }}" alt="" class="img-fluid" width="250">
+                                    <img src="{{  asset('images/' ~ article.image) }}" alt="" class="img-fluid">
                                 {% endif %}
                             </div>
 
@@ -161,6 +162,7 @@
                                 <div class="touscommentaires">
                                     {% for comment in article.commentaires %}
                                         <div>
+                                            {% if app.user == comment.auteur %}
                                             <div class="dropdown">
                                                 <small>À {{ comment.datePublication|date('H:i d/m/Y') }}</small>
                                                 <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -171,11 +173,14 @@
                                                     <a class="dropdown-item delete-comment" href="{{ path('app_commentaire_delete',{'id':comment.id}) }}">Supprimer</a>
                                                 </div>
                                             </div>
+                                            {% else %}
+                                                <div> <small>{{ comment.datePublication|date('H:i d/m/Y') }}</small></div>
+                                            {% endif %}
                                             <div class="vignette mr-2">
                                                 {% if comment.auteur.photo is null %}
-                                                    <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50">
+                                                    <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="" height="50" width="50">
                                                 {% else %}
-                                                    <img src="{{ asset('images/' ~ comment.auteur.photo) }}" alt="" width="50">
+                                                    <img src="{{ asset('images/' ~ comment.auteur.photo) }}" alt="" width="50"  height="50">
                                                 {% endif %}
                                             </div>
                                                 <small><a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a> :</small>

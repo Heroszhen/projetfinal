@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -17,6 +18,27 @@ class ArticleRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Article::class);
+    }
+
+    public function getByUserFriends(User $user)
+    {
+        $friendsId = [];
+
+        foreach ($user->getAmis() as $friend) {
+            $friendsId[] = $friend->getSuivi()->getId();
+        }
+
+        $qb = $this->createQueryBuilder('a');
+
+        $qb
+            ->add('where', $qb->expr()->in('a.auteur', ':friends'))
+            ->setParameter('friends', $friendsId)
+            ->addOrderBy('a.datePublication', 'desc')
+        ;
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
     }
 
     // /**

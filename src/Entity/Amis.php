@@ -33,24 +33,24 @@ class Amis
         return $this->id;
     }
 
-    public function getSuiveur(): ?user
+    public function getSuiveur(): ?User
     {
         return $this->suiveur;
     }
 
-    public function setSuiveur(?user $suiveur): self
+    public function setSuiveur(?User $suiveur): self
     {
         $this->suiveur = $suiveur;
 
         return $this;
     }
 
-    public function getSuivi(): ?user
+    public function getSuivi(): ?User
     {
         return $this->suivi;
     }
 
-    public function setSuivi(?user $suivi): self
+    public function setSuivi(?User $suivi): self
     {
         $this->suivi = $suivi;
 

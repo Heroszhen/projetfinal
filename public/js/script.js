@@ -75,6 +75,7 @@ $('.formcommentaire').each(function(){
             action,
             $(this).serialize(),
             function(response){
+                form.find("input").val("");
                form.parent().parent().find(".touscommentaires").prepend(response);
             },
         );
