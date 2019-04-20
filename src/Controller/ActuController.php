@@ -21,22 +21,9 @@ class ActuController extends AbstractController
     public function index()
     {
         $repository = $this->getDoctrine()->getRepository(Article::class);
-        //$articles = [];
-//        $amis = $user->getAmis();
-//        foreach ($amis as $ami) {
-//            dump($ami->getSuivi());
-//            $articles[]= $ami->getSuivi()->getArticles();
-//            foreach($articles as $article) {
-//                //dump();
-//            }
-//        }
 
         $articles = $repository->getByUserFriends($this->getUser());
-        /*
-        foreach($articles as $article){
-            dump($article->);
-        }*/
-        //$articles = $repository->findAll(["auteur"=>$user->getAmis()->]);
+
         return $this->render('actu/index.html.twig', [
             'articles' => $articles
         ]);

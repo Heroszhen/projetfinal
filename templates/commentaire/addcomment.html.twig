@@ -1,4 +1,5 @@
 <div>
+    {% if app.user == comment.auteur %}
     <div class="dropdown">
         <small>{{ date }}</small>
         <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -9,7 +10,16 @@
             <boutton id="d{{ comment.id }}" class="dropdown-item delete-comment" onclick="fdelete({{ comment.id }})">Supprimer</boutton>
         </div>
     </div>
-    <div class="vignette"><img src="{{ image }}" alt='' width='50'></div>
+    {% else %}
+        <div> <small>{{ date }}</small></div>
+    {% endif %}
+    <div class="vignette">
+        {% if comment.auteur.photo is null %}
+        <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt='' width='50' height="50">
+        {% else %}
+        <img src="{{ image }}" alt='' width='50' height="50">
+        {% endif %}
+    </div>
     <a href='{{ path("app_profil_index",{ "id":comment.auteur.id}) }}'>{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a><br>
     <span>{{ comment.contenu }}</span> <br><br></div>
 </div>
