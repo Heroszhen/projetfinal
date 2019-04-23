@@ -19,21 +19,30 @@
     {# LISTE DES PUBLICATIONS #}
 
     <div class="col-md-9 mt-5">
-        <div class="actu rounded-lg border p-3">
+        {% for article in articles %}
+        <div class="actu rounded-lg border p-3 mb-3">
 
-            <a href="">
-                <div class="vignette"></div>
-                Prénom Nom
+            <a href="/profil">
+                <div class="vignette">
+                    {% if article.auteur.photo is null %}
+                        <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="" width="50" height="50">
+                    {% else %}
+                        <img src="{{ asset('images/' ~ article.auteur.photo) }}" alt="" width="50" height="50" class="mr-2">
+                    {% endif %}
+                </div>
+                {{ article.auteur.prenom }} {{ article.auteur.nom }}
             </a>
             <br>
-            <small>28/12/1990 à 12:34</small>
+            <small>{{ article.datePublication | date('d/m/Y') }} à {{ article.datePublication | date('h:i') }}</small>
             <div class="mt-2 publication">
                 <p>
-                    Saepissime igitur mihi de amicitia cogitanti maxime illud considerandum videri solet, utrum propter imbecillitatem atque inopiam desiderata sit amicitia, ut dandis recipiendisque meritis quod quisque minus per se ipse posset, id acciperet ab alio vicissimque redderet, an esset hoc quidem proprium amicitiae, sed antiquior et pulchrior et magis a natura ipsa profecta alia causa.
+                    {{ article.contenu |nl2br }}
                 </p>
 
                 <div class="col-12 image pb-3 text-center">
-                    <img src="https://i.ytimg.com/vi/B1SmlHmqTmM/hqdefault.jpg" class="img-fluid" width="250">
+                    {% if article.image is not null %}
+                        <img src="{{  asset('images/' ~ article.image) }}" alt="" class="img-fluid">
+                    {% endif %}
                 </div>
             </div>
 
@@ -41,23 +50,58 @@
             {# COMMENTAIRES #}
 
             <div class="commentaires col-12 border-top border-dark pt-2 pb-2">
-                <small>Commenter :</small>
-                <form action="">
-                    <input type="text">
-                    <button class="btn btn-link">Publier</button>
-                </form>
-                <small>
-                    <a href="">
-                        <div class="vignette"></div>
-                        Prénon Nom
-                    </a>
-                    <p class="">Contenu du commentaire</p>
-                </small>
+                <div class="commenter">
+                    <small><a class="showcomments btn btn-link" href="#">Commenter</a> :</small>
+
+                    <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
+                        <input type="text" name="commentaire" style="width:80%;">
+                        <input type="hidden">
+                        <button type="submit" class="btn btn-link">Publier</button>
+                    </form>
+                </div>
+                <div class="touscommentaires">
+                    {% for comment in article.commentaires %}
+                        <div>
+                            {% if app.user == comment.auteur %}
+                                <div class="dropdown">
+                                    <small>À {{ comment.datePublication|date('H:i d/m/Y') }}</small>
+                                    <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-certificate"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a data-id="{{ comment.id }}" class="dropdown-item update-comment" href="{{ path('app_commentaire_update',{'id':comment.id}) }}">Modifier</a>
+                                        <a class="dropdown-item delete-comment" href="{{ path('app_commentaire_delete',{'id':comment.id}) }}">Supprimer</a>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div> <small>{{ comment.datePublication|date('H:i d/m/Y') }}</small></div>
+                            {% endif %}
+                            <div class="vignette mr-2">
+                                {% if comment.auteur.photo is null %}
+                                    <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="" height="50" width="50">
+                                {% else %}
+                                    <img src="{{ asset('images/' ~ comment.auteur.photo) }}" alt="" width="50"  height="50">
+                                {% endif %}
+                            </div>
+                            <small><a href="{{ path('app_profil_index',{'id':comment.auteur.id}) }}">{{ comment.auteur.prenom }} {{ comment.auteur.nom }}</a> :</small>
+                            <br>
+                            <div class="text-justify row">
+                                <small class="col-12">
+                                    <span>{{ comment.contenu }}</span>
+                                </small>
+                            </div><br>
+                        </div>
+
+                    {% endfor %}
+                </div>
+
             </div>
+
 
             {# FIN DES COMMENTAIRES #}
 
         </div>
+        {% endfor %}
     </div>
 
     {# FIN DE LA LISTE DES PUBLICATIONS #}
