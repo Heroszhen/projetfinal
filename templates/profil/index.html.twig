@@ -150,7 +150,7 @@
                                     <small><a class="showcomments btn btn-link" href="#">Commenter</a> :</small>
 
                                     <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
-                                        <input type="text" name="commentaire">
+                                        <input type="text" name="commentaire" required>
                                         <input type="hidden">
                                         <button type="submit" class="btn btn-link">Publier</button>
                                     </form>
