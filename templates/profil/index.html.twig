@@ -14,8 +14,8 @@
             <h2 class="mt-5">{{ user.prenom}} {{ user.nom }}</h2>
 
 
-            <div class="profilphoto">
-                <img src="{{ asset('images/' ~ user.photo) }}" alt="" class="imgprofil rounded-circle img-fluid">
+            <div class="profilphoto align-content-center">
+                <img src="{{ asset('images/' ~ user.photo) }}" alt="" class="imgprofil rounded img-fluid mt-5">
             </div>
             <br>
 
@@ -44,17 +44,17 @@
 
             </div>
 
-            <div class="bio mt-5">
+            <div class="bio mt-5 col-md-8">
                 <h3>Biographie</h3>
-                <p class="text-justify col-md-8">{{ user.bio|nl2br }}</p>
+                <p class="text-justify">{{ user.bio|nl2br }}</p>
             </div>
 
             <br>
 
             {% if app.user == user %}
 
-                <a type="" class="btn btn-success" href="{{ path('app_profil_edituser', {'id': user.id}) }}">
-                    Modifier le profil
+                <a type="" class="btn btn-link" href="{{ path('app_profil_edituser', {'id': user.id}) }}">
+                    <i class="fas fa-user-edit"></i> Modifier le profil
                 </a>
 
             {% endif %}
@@ -136,7 +136,9 @@
                                 </div>
                             {% endif %}
                             <div class="col-12 contenu p-3 text-justify">
+                                <p>
                                 {{ article.contenu }}
+                                </p>
                             </div>
                             <div class="col-12 image pb-3 text-center">
                                 {% if article.image is not null %}
@@ -184,7 +186,9 @@
                                             <br>
                                             <div class="text-justify row">
                                                 <small class="col-12">
-                                                    <span>{{ comment.contenu }}</span>
+                                                    <p>
+                                                        <span>{{ comment.contenu }}</span>
+                                                    </p>
                                                 </small>
                                             </div><br>
                                         </div>
