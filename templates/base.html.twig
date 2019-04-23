@@ -73,7 +73,7 @@
 
         {% if app.user is not null %} {# Si l'utilisateur est connecté #}
 
-       <form class="form-inline my-2 my-lg-0" id="fsearch" action="{{ path('app_recherche_recherche') }}" method="POST">
+       <form class="form-inline my-2 my-lg-0" id="fsearch" action="{{ path('app_recherche_recherche') }}" method="POST" autocomplete="off">
             <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" name="recherchecontact">
            <button type="submit" data-href="{{ path('app_recherche_recherche') }}" class="btn btn-outline-light my-2 my-sm-0 search-user">
                Rechercher
