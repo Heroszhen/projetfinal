@@ -58,7 +58,7 @@
                 {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="#">
-                        Projet de Zhen
+                        Révisions
                     </a>
                 </li>
             </ul>
@@ -73,12 +73,16 @@
 
         {% if app.user is not null %} {# Si l'utilisateur est connecté #}
 
-       <form class="form-inline my-2 my-lg-0" id="fsearch" action="{{ path('app_recherche_recherche') }}" method="POST">
+       <form class="form-inline my-2 my-lg-0" id="fsearch" action="{{ path('app_recherche_recherche') }}" method="POST" autocomplete="off">
             <input class="form-control mr-sm-2" type="text" placeholder="Rechercher" name="recherchecontact">
            <button type="submit" data-href="{{ path('app_recherche_recherche') }}" class="btn btn-outline-light my-2 my-sm-0 search-user">
                Rechercher
            </button>
         </form>
+         <div id="searchresponse">
+             <div>5555555
+             </div>
+         </div>
         {% endif %}
 
         </div>
@@ -107,6 +111,11 @@
         {% block body %}{% endblock %}
     </div>
 </div>
+
+{# *********************image agrandie : Ajouté par zhen******************* #}
+<div id="bigimgbody"><img src="" alt="" id="bigimg"></div>
+
+
 {% block javascripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
