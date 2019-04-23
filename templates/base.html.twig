@@ -32,6 +32,11 @@
 </nav>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-warning">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
     <div class="container navbar-nav">
         {% if app.user is not null %}
         <a class="navbar-brand" href="{{ path("app_actu_index",{'id':app.user.id}) }}">
@@ -45,25 +50,25 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_profil_index',{'id':app.user.id}) }}">
+                    <a class="navbar-brand" href="{{ path('app_profil_index',{'id':app.user.id}) }}">
                         Profil
                     </a>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_amis_index', {'id':app.user.id}) }}">
+                    <a class="navbar-brand" href="{{ path('app_amis_index', {'id':app.user.id}) }}">
                         Mes Amis
                     </a>
                 </li>
 
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="navbar-brand" href="#">
                         Projet de Zhen
                     </a>
                 </li>
             </ul>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_message_index') }}">
+                        <a class="navbar-brand" href="{{ path('app_message_index') }}">
                             Messages
                         </a>
                     </li>

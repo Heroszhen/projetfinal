@@ -100,8 +100,6 @@
         <div class="col-md-7">
 
 
-            <img class="mt-5 rounded-lg" src="https://blog.interflora.fr/wp-content/uploads/2016/05/Entretien-bouquet-de-fleurs.jpg" alt="">
-
             {# Les publications(articles) #}
             <div class="mt-5">
                 <div class="container" id="articles">
@@ -114,7 +112,7 @@
                     <br>
                     {% endif %}
                     {% for article in user.articles %}
-                        <div class="row mb-4 border border-secondary pt-2 rounded actu" id="article{{ article.id }}">
+                        <div class="row mb-4 border pt-2 rounded-lg actu" id="article{{ article.id }}">
                             <div class="col-6">
                                 {% if article.auteur.photo is null %}
                                     <img src="http://miner8.com/en/wp-content/uploads/2017/06/Alexandra_Daddario_2016-e1497505927225.jpg" alt="" width="50">

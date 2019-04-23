@@ -39,9 +39,11 @@
             <div class="text-center">
                 <em>{{ photo.datePublication|date('d/m/Y') }}</em>
             </div>
+
         <div class="photos m-2 imgEffets">
             <img src="{{ asset('images/' ~ photo.image) }}" alt="..." class="img-album img">
-        </div> <br>
+        </div>
+                <br>
             </div>
 
             {# suppression des photo  #}
@@ -51,7 +53,6 @@
                     <i class="fas fa-times mr-5"></i>
                 </a>
             {% endif %}
-
 
         {% endfor %}
 
