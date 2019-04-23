@@ -6,25 +6,25 @@
 
     <h2 class="mt-3">Album photo</h2>
 
-{% if app.user is not null %}
-    {% if user == app.user %}
-        {{ form_start(form) }}
-        <div class="row">
-            <div class="col-4">
-                {{ form_row(form.image) }}
+    {% if app.user is not null %}
+        {% if user == app.user %}
+            {{ form_start(form) }}
+            <div class="row">
+                <div class="col-4">
+                    {{ form_row(form.image) }}
+                </div>
             </div>
-        </div>
 
-        <div>
-            <button type="submit" class="btn btn-info">Publier</button>
-        </div>
-        {{ form_end(form) }}
+            <div>
+                <button type="submit" class="btn btn-info">Publier</button>
+            </div>
+            {{ form_end(form) }}
         {% endif %}
     {% endif %}
 
 
 
-{# Les images viendront s'afficher ici les unes à la suite des autres. De la plus récente à la plus ancienne #}
+    {# Les images viendront s'afficher ici les unes à la suite des autres. De la plus récente à la plus ancienne #}
 
     <h3 class="text-center"><em>Les photos({{ photos|length }})</em></h3>
 
@@ -33,15 +33,15 @@
     </div>
     <div class="row justify-content-start mt-5">
         {% for photo in photos  %}
-          {#<em>{{ photo.datePublication|date('d/m/Y') }}</em>
-            <br>#}
+            {#<em>{{ photo.datePublication|date('d/m/Y') }}</em>
+              <br>#}
             <div>
-            <div class="text-center">
-                <em>{{ photo.datePublication|date('d/m/Y') }}</em>
-            </div>
-        <div class="photos m-2 imgEffets">
-            <img src="{{ asset('images/' ~ photo.image) }}" alt="..." class="img-album img">
-        </div> <br>
+                <div class="text-center">
+                    <em>{{ photo.datePublication|date('d/m/Y') }}</em>
+                </div>
+                <div class="photos m-2 imgEffets">
+                    <img src="{{ asset('images/' ~ photo.image) }}" alt="..." class="img-album img">
+                </div> <br>
             </div>
 
             {# suppression des photo  #}
