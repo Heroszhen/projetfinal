@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-primary" id="navbar">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top" id="header">
     <div class="container">
         <h1 class="text-light">bon.jour <i class="fas fa-mug-hot"></i></h1>
         <ul class="navbar-nav">
@@ -31,7 +31,7 @@
     </div>
 </nav>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-warning">
+<nav class="navbar navbar-expand-md navbar-dark bg-warning fixed-top" id="nav">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -60,18 +60,19 @@
                         Mes Amis
                     </a>
                 </li>
-
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{{ path('app_message_index') }}">
+                            Messages
+                        </a>
+                    </li>
                 {% endif %}
+
                 <li class="nav-item">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="#" target="_blank">
                         Révisions
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="navbar-brand" href="{{ path('app_message_index') }}">
-                            Messages
-                    </a>
-                </li>
+
             </ul>
 
         </div>
@@ -94,8 +95,9 @@
     </div>
 </nav>
 
+
 <div class="transparence py-2">
-    <div class="container">
+    <div class="container" id="container">
 
         {# Affichage des messages flash #}
         {% for type, messages in app.session.flashBag.all %}
