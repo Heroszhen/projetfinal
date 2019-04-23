@@ -86,25 +86,30 @@ class ProfilController extends AbstractController
      */
     public function editUser(User $user, Request $request)
     {
+        $originalImage = null;
         $manager = $this->getDoctrine()->getManager();
         if (is_null($user)) {
             $user = $this->getUser();
         } else {
             $user = $manager->getRepository(User::class)->find($user);
+            $image = $user->getPhoto();
+            if (!is_null($image)){
+                $originalImage = $image;
+
+            }
         }
-
-        $originalImage = null;
-
 
         $form = $this->createForm(ModifProfilType::class,$user);
         $form->handleRequest($request);
         if($form->isSubmitted()){
-            if($form->isValid()) {
+            if($form->isValid()){
                 $image = $user->getPhoto();
-                if (!is_null($image)) {
+                if (!is_null($image)){
+
                     $newimage = uniqid() . '.' . $image->guessExtension();
                     $image->move($this->getParameter('upload_dir'), $newimage);
                     $user->setPhoto($newimage);
+
                     if (!is_null($originalImage)) unlink($this->getParameter('upload_dir') . '/' . $originalImage);
                 } else {
                     $user->setPhoto($originalImage);

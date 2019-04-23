@@ -14,7 +14,7 @@
             <h2 class="mt-5">{{ user.prenom}} {{ user.nom }}</h2>
 
 
-            <div class="profilphoto rounded-circle">
+            <div class="profilphoto">
                 <img src="{{ asset('images/' ~ user.photo) }}" alt="" class="imgprofil rounded-circle img-fluid">
             </div>
             <br>
@@ -53,7 +53,7 @@
 
             {% if app.user == user %}
 
-                <a type="button" class="btn btn-link" href="{{ path('app_profil_edituser', {'id': user.id}) }}">
+                <a type="" class="btn btn-success" href="{{ path('app_profil_edituser', {'id': user.id}) }}">
                     Modifier le profil
                 </a>
 
@@ -145,12 +145,12 @@
                             </div>
 
                             {# COMMENTAIRES #}
-                            <div class="commentaires col-12 border-top border-dark pt-2 pb-2">
+                            <div class="commentaires col-12 border-top pt-2 pb-2">
                                 <div class="commenter">
                                     <small><a class="showcomments btn btn-link" href="#">Commenter</a> :</small>
 
                                     <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
-                                        <input type="text" name="commentaire">
+                                        <input type="text" name="commentaire" class="rounded-lg">
                                         <input type="hidden">
                                         <button type="submit" class="btn btn-link">Publier</button>
                                     </form>
