@@ -1,0 +1,14 @@
+{% if users|length > 0 %}
+<div class="container-fluid">
+    <div class="row">
+        {% for user in users %}
+            <div class="col-12">
+                <a href="{{ path('app_profil_index', {'id': user.id}) }}"
+                   class="" style="font-size: large">
+                    {{ user.prenom }} {{ user.nom }}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

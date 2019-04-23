@@ -202,3 +202,39 @@ $(".showcomments").each(function(){
         $(this).parent().parent().parent().find(".touscommentaires > div").toggle();
     })
 });
+
+
+/*la barre de recherche dynamique*/
+$("input[name='recherchecontact']").keyup(function(){
+    var name = $(this).val();
+    if(name != ""){
+        $.get(
+            "/recherche2/"+name,
+            function(response){
+                if(response.length!=0){
+                    $('#searchresponse>div').html("");
+                    $('#searchresponse>div').append(response);
+                    $("#searchresponse").show();
+                }
+            }
+        );
+    }else{
+        $("#searchresponse").hide();
+    }
+})
+
+$('body').click(function(e) {
+    $('#searchresponse>div').html("");
+    $('#searchresponse').hide();
+});
+
+/*l'image agrandi*/
+$("img.img-album").on("click",function(e){
+    $("#bigimg").css({'height':'95%','width':'auto'});
+    $("#bigimg").attr("src",$(this).attr("src"));
+    $("#bigimgbody").css("display","flex");
+});
+
+$("#bigimgbody").on("click",function(e){
+    if($(e.target).is("#bigimgbody"))$(this).hide();
+});
