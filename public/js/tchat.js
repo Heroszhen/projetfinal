@@ -9,7 +9,7 @@ $(function(){
         // ouvre la modal de confirmation
         $('#message-utilisateur').show();
 
-        setInterval(getMessages,2000);
+        //setInterval(getMessages,2000);
     });
 
 
