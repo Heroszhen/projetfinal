@@ -27,4 +27,17 @@ class RechercheController extends AbstractController
             'users' => $users
         ]);
     }
+
+    /**
+     * @Route("/recherche2/{name}")
+     */
+    public function rechercheAction2($name){
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $users = $repository->search($name);
+
+        return $this->render('recherche/dynamique.html.twig',
+            [
+                'users' => $users
+            ]);
+    }
 }

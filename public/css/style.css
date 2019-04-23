@@ -123,3 +123,35 @@ img.zoom:hover{
     filter: grayscale(1) blur(10px); /* grayscale: convertie votre image en nuances de gris et blur applique un flou*/
 
 }
+
+/**************La barre de recherche dynamique : ajouté par zhen************/
+#searchresponse{
+    background:white;
+    position:absolute;
+    z-index:2;
+    position:relative;
+    width:225px;
+    top:43px;
+    left:-338px;
+    max-height:500px;
+    display:none;
+}
+
+#searchresponse>div{
+    box-sizing: border-box;
+    padding:10px;
+}
+
+/**************L'image agrandie : ajouté par zhen************/
+#bigimgbody{
+    position:absolute;
+    z-index:2;
+    position:fixed;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    justify-content:center;
+    align-items:center;
+    display:none;
+}
