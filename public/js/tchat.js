@@ -6,6 +6,7 @@ $(function(){
         // empeche d'aller vers la page de suppression
         event.preventDefault();
         clearInterval(thetime);
+
         interlocuteur = $(this).attr("data-ami");
         //$('#message-utilisateur').data('link', $(this).attr('href'));
 
@@ -26,6 +27,7 @@ $(function(){
                 "/message/user/"+interlocuteur+"-"+id,
                 function (response) {
                     $('#message-container').append(response);
+                    if(id==0) $("#message-container").scrollTop($("#message-container").prop('scrollHeight'));
                 }
             );
         }
