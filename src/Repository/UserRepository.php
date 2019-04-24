@@ -32,6 +32,7 @@ class UserRepository extends ServiceEntityRepository
         //le 'u' est l'alias de la table user dans la requete
         $qb = $this->createQueryBuilder('u');
 
+        // librairie d'expression
         $expr = $qb->expr();
 
         //tri par nom decroissant

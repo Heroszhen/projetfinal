@@ -4,25 +4,17 @@
 
 {% block body %}
 <h2>Fil d'actualité</h2>
-<div class="row justify-content-between">
+<div class="row justify-content-center">
 
 
-    {# COLONNE DE GAUCHE #}
 
-    <div class="col-md-3 mt-5">
-
-        Rajouter du contenu dans cette colonne
-
-    </div>
-
-
-    {# COLONNE DE DROITE #}
+    {# COLONNE CENTRALE #}
 
     {# LISTE DES PUBLICATIONS #}
 
-    <div class="col-md-9 mt-5">
-        {% for article in articles %}
-        <div class="actu rounded border p-3 mb-3">
+    <div class="col-md-7 mt-5">
+       {% for article in articles %}
+        <div class="actu rounded-lg border p-3 mb-3">
 
             <a href="/profil">
                 <div class="vignette">
@@ -51,12 +43,12 @@
 
             {# COMMENTAIRES #}
 
-            <div class="commentaires col-12 border-top border-dark pt-2 pb-2">
+            <div class="commentaires col-12 border-top pt-2 pb-2">
                 <div class="commenter">
                     <small><a class="showcomments btn btn-link" href="#">Commenter</a> :</small>
 
                     <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
-                        <input type="text" name="commentaire" style="width:80%;">
+                        <input type="text" name="commentaire" style="width:80%;" class="rounded-lg">
                         <input type="hidden">
                         <button type="submit" class="btn btn-link">Publier</button>
                     </form>

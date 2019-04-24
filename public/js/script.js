@@ -68,17 +68,20 @@ $('.update-article').click(function(){
 $('.formcommentaire').each(function(){
     $(this).submit(function(e) {
         e.preventDefault();
-        var action = $(this).attr("action");
-        console.log(action);
-        var form = $(this);
-        $.post(
-            action,
-            $(this).serialize(),
-            function(response){
-                form.find("input").val("");
-               form.parent().parent().find(".touscommentaires").prepend(response);
-            },
-        );
+        if ($('input[name="commentaire"]', this).val() != '' ) {
+            var action = $(this).attr("action");
+            console.log(action);
+            var form = $(this);
+            $.post(
+                action,
+                $(this).serialize(),
+                function(response){
+                    form.find("input").val("");
+                    form.parent().parent().find(".touscommentaires").prepend(response);
+                },
+            );
+        }
+
     });
 });
 

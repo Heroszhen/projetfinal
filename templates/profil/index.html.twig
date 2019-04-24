@@ -14,7 +14,7 @@
             <h2 class="mt-5">{{ user.prenom}} {{ user.nom }}</h2>
 
 
-            <div class="profilphoto rounded-circle">
+            <div class="profilphoto">
                 <img src="{{ asset('images/' ~ user.photo) }}" alt="" class="imgprofil rounded-circle img-fluid">
             </div>
             <br>
@@ -53,7 +53,7 @@
 
             {% if app.user == user %}
 
-                <a type="button" class="btn btn-link" href="{{ path('app_profil_edituser', {'id': user.id}) }}">
+                <a type="" class="btn btn-success" href="{{ path('app_profil_edituser', {'id': user.id}) }}">
                     Modifier le profil
                 </a>
 
@@ -98,10 +98,7 @@
 
 
         <div class="col-md-7">
-            <img class="mt-5 rounded-lg img-fluid" src="https://blog.interflora.fr/wp-content/uploads/2016/05/Entretien-bouquet-de-fleurs.jpg" alt="">
 
-
-            <img class="mt-5 rounded-lg" src="https://blog.interflora.fr/wp-content/uploads/2016/05/Entretien-bouquet-de-fleurs.jpg" alt="">
 
             {# Les publications(articles) #}
             <div class="mt-5">
@@ -115,7 +112,7 @@
                     <br>
                     {% endif %}
                     {% for article in user.articles %}
-                        <div class="row mb-4 border border-secondary pt-2 rounded actu" id="article{{ article.id }}">
+                        <div class="row mb-4 border pt-2 rounded-lg actu" id="article{{ article.id }}">
                             <div class="col-6">
                                 {% if article.auteur.photo is null %}
                                     <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="" width="50" height="50">
@@ -148,12 +145,12 @@
                             </div>
 
                             {# COMMENTAIRES #}
-                            <div class="commentaires col-12 border-top border-dark pt-2 pb-2">
+                            <div class="commentaires col-12 border-top pt-2 pb-2">
                                 <div class="commenter">
                                     <small><a class="showcomments btn btn-link" href="#">Commenter</a> :</small>
 
                                     <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
-                                        <input type="text" name="commentaire">
+                                        <input type="text" name="commentaire" class="rounded-lg" required>
                                         <input type="hidden">
                                         <button type="submit" class="btn btn-link">Publier</button>
                                     </form>
