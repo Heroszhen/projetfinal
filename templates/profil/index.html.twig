@@ -15,7 +15,13 @@
 
 
             <div class="profilphoto align-content-center">
+                {% if user.photo is null %}
+
+                    <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="" class="imgprofil rounded img-fluid mt-5">
+                {% else %}
+
                 <img src="{{ asset('images/' ~ user.photo) }}" alt="" class="imgprofil rounded img-fluid mt-5">
+                {% endif %}
             </div>
             <br>
 
@@ -68,7 +74,12 @@
                         {% for ami in user.amis %}
                             <div class="listevignette m-1">
                                 <a href="{{ path('app_profil_index',{'id':ami.suivi.id}) }}">
-                                    <img class="vignette" src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="{{ ami.suivi.prenom }} {{ ami.suivi.nom }}" width="100%">
+
+                                    {% if ami.suivi.photo is null %}
+                                        <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="{{ ami.suivi.prenom }} {{ ami.suivi.nom }}" title="{{ ami.suivi.prenom }} {{ ami.suivi.nom }}" width="100%">
+                                    {% else %}
+                                    <img class="vignette" src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="{{ ami.suivi.prenom }} {{ ami.suivi.nom }}" title="{{ ami.suivi.prenom }} {{ ami.suivi.nom }}" width="100%">
+                                    {% endif %}
                                 </a>
                             </div>
                         {% endfor %}
