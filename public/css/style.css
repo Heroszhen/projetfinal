@@ -36,7 +36,9 @@ body{
 .danger{
     color: red;
 }
-
+.success{
+    color: green;
+}
 .listevignette{
     display: inline-flex;
     width: 50px;
