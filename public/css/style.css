@@ -156,3 +156,7 @@ img.zoom:hover{
     align-items:center;
     display:none;
 }
+
+#message-container{
+    overflow: auto;
+}

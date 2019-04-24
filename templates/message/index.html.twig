@@ -2,12 +2,11 @@
 
 {% block body %}
     <div class="container row">
-    <div class="col-4">
+    <div class="col-4 mt-5">
         <table class="table">
-        {% for user in users %}
+        {% for ami in amis %}
             <tr>
-            <p>{{ user.id }}</p>
-            <p><a href="{{ path('app_message_message', {'id': user.id}) }}" class="show-message">{{ user }}</a></p>
+            <p><a data-ami="{{ ami.suivi.id }}" href="{{ path('app_message_message', {'id': ami.suivi.id}) }}" class="show-message">{{ ami.suivi }}</a></p>
             </tr>
         {% endfor %}
         </table>
@@ -15,16 +14,17 @@
     <div class="col-8">
         <div id="message-utilisateur" data-link="" style="display: none">
             <div class="card mt-4">
-                <div id="message-container" class="card-body" style="height :40em; overflow: auto">
+                <div id="message-container" class="card-body row" style="height :40em; overflow: auto">
+
                 </div>
             </div>
             <form id="form-message" class="mt-2">
                 <div class="row">
                     <div class="form-group col-11">
-                        <input name="message" class="form-control" placeholder="votre message">
+                        <input name="messageinput" class="form-control" placeholder="votre message">
                     </div>
                     <div class="col-1">
-                        <button type="submit" class="btn btn-primary" > Envoyer</button>
+                        <button type="submit" id="messagesub" class="btn btn-primary"> Envoyer</button>
                     </div>
                 </div>
             </form>

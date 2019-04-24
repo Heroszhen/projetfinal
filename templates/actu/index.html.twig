@@ -24,7 +24,7 @@
         {% for article in articles %}
         <div class="actu rounded border p-3 mb-3">
 
-            <a href="/profil">
+            <a href="{{ path("app_profil_index",{'id':article.auteur.id}) }}">
                 <div class="vignette">
                     {% if article.auteur.photo is null %}
                         <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="" width="50" height="50">
