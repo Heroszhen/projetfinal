@@ -1,9 +1,15 @@
 
-    {% for message in messages  %}
-        <div>
-        {{ message.contenu }}
-        {{ message.datePublication|date('d/m/Y H:i:s') }}
-        </div><br>
-    {% endfor %}
+
+        {% for message in messages  %}
+        <div class="col-12 mb-3" data-id="{{ message.id }}">
+            <div>
+             <span class="badge badge-warning">
+                 <a href="{{ path('app_profil_index',{'id':message.auteur.id}) }}" class="h5">{{ message.auteur }}</a>
+             </span>({{ message.datePublication|date('d/m/Y H:i:s') }}) :
+            </div>
+            {{ message.contenu }}
+        </div>
+        {% endfor %}
+
 
 

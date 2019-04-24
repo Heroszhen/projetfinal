@@ -241,3 +241,39 @@ $("img.img-album").on("click",function(e){
 $("#bigimgbody").on("click",function(e){
     if($(e.target).is("#bigimgbody"))$(this).hide();
 });
+
+/*
+page quizz
+ */
+$(".quizz-answer").on("click", function(event){
+    event.preventDefault();
+    var erreur = 0;
+    $("select.reponse").each(function () {
+        var value = $(this).val();
+        var correction = $(this).next(".correction-answer");
+        var affichage = correction.next(".affichage-answer")
+        console.log(correction);
+        if (value == correction.html()){
+            affichage.addClass("success");
+            affichage.removeClass("danger");
+            affichage.html("C'est la bonne reponse")
+        }
+        else {
+            affichage.addClass("danger");
+            affichage.removeClass("success");
+            affichage.html("Ce n'est pas la bonne reponse")
+            erreur ++;
+            console.log(erreur);
+        }
+        affichage.show();
+    });
+    var score = 20 - erreur;
+    $.get(
+        "/resultat/"+score,
+        function(response){
+
+        }
+    );
+    document.location.reload(true);
+
+} )

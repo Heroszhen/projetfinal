@@ -13,6 +13,21 @@
     {# LISTE DES PUBLICATIONS #}
 
     <div class="col-md-9 mt-5">
+        {% for article in articles %}
+        <div class="actu rounded border p-3 mb-3">
+
+            <a href="{{ path("app_profil_index",{'id':article.auteur.id}) }}">
+                <div class="vignette">
+                    {% if article.auteur.photo is null %}
+                        <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="" width="50" height="50">
+                    {% else %}
+                        <img src="{{ asset('images/' ~ article.auteur.photo) }}" alt="" width="50" height="50" class="mr-2">
+                    {% endif %}
+                </div>
+                {{ article.auteur.prenom }} {{ article.auteur.nom }}
+            </a>
+            <br>
+            <small>{{ article.datePublication | date('d/m/Y') }} à {{ article.datePublication | date('h:i') }}</small>
        {% for article in articles %}
         <div class="actu rounded-lg border p-3 mb-3">
                     <a href="/profil">
