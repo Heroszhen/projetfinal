@@ -52,7 +52,7 @@
 
             <div class="bio mt-5 col-md-8">
                 <h3>Biographie</h3>
-                <p class="text-justify">{{ user.bio|nl2br }}</p>
+                <p class="text-justify"><i class="fas fa-quote-left"></i> {{ user.bio|nl2br }} <i class="fas fa-quote-right"></i></p>
             </div>
 
             <br>
@@ -197,7 +197,7 @@
                                             <br>
                                             <div class="text-justify row">
                                                 <small class="col-12">
-                                                    <div class="rounded-pill border border-light bg-light p-4">
+                                                    <div class="rounded-lg border border-light bg-light p-1">
                                                         <span class="">{{ comment.contenu }}</span>
                                                     </div>
                                                 </small>

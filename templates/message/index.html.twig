@@ -2,28 +2,35 @@
 
 {% block body %}
     <div class="container row">
-    <div class="col-4 mt-5">
+    <div class="col-md-4 col-12 mt-5">
         <table class="table">
         {% for ami in amis %}
             <tr>
-            <p><a data-ami="{{ ami.suivi.id }}" href="{{ path('app_message_message', {'id': ami.suivi.id}) }}" class="show-message">{{ ami.suivi }}</a></p>
+            <p>
+                {% if ami.suivi.photo is null %}
+                    <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="{{ ami.suivi.prenom }}" width="100">
+                {% else %}
+                <img src="{{ asset('images/' ~ ami.suivi.photo) }}" alt="" width="100">
+                    {% endif %}
+                <a data-ami="{{ ami.suivi.id }}" href="{{ path('app_message_message', {'id': ami.suivi.id}) }}" class="show-message">{{ ami.suivi }}</a>
+            </p>
             </tr>
         {% endfor %}
         </table>
     </div>
-    <div class="col-8">
+    <div class="col-md-8 col-12">
         <div id="message-utilisateur" data-link="" style="display: none">
             <div class="card mt-4">
-                <div id="message-container" class="card-body row" style="height :40em; overflow: auto">
+                <div id="message-container" class="card-body row rounded-lg" style="height :40em; overflow: auto">
 
                 </div>
             </div>
             <form id="form-message" class="mt-2">
                 <div class="row">
-                    <div class="form-group col-11">
-                        <input name="messageinput" class="form-control" placeholder="votre message">
+                    <div class="form-group col-10">
+                        <input name="messageinput" class="form-control rounded-lg" placeholder="Votre message">
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <button type="submit" id="messagesub" class="btn btn-primary"> Envoyer</button>
                     </div>
                 </div>

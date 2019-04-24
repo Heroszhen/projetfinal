@@ -37,6 +37,7 @@ $(function(){
             "/message/addmessage/"+interlocuteur+"-"+$("input[name='messageinput']").val(),
             function (response) {
 
+                $("input[name='messageinput']").val("");
             }
         );
     });
