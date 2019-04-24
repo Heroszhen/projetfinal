@@ -9,7 +9,7 @@
             <p>{{ question.question }}</p>
             <div>
             <select class="custom-select reponse">
-                <option value="0">veuillez selectionner un choix</option>
+                <option value="0">Veuillez sélectionner un choix</option>
                 <option value="1">{{ question.option1 }}</option>
                 <option value="2">{{ question.option2 }}</option>
                 <option value="3">{{ question.option3 }}</option>
@@ -20,24 +20,24 @@
             </div>
         </div>
     {% endfor %}
-            <button type="submit" class="quizz-answer">soumettre</button>
+            <button type="submit" class="quizz-answer btn btn-primary">Soumettre</button>
         </div>
     </div>
     {% else %}
         <h2 class="text-center mt-5 mb-5">Classement</h2>
-        <table class="table table-primary mt-3">
+        <table class="table table-striped mt-5">
             <thead>
-            <tr>
-                <th scope="col">score</th>
-                <th scope="col">utilisateur</th>
-                <th scope="col">date</th>
+            <tr class="table-success">
+                <th scope="col">Score</th>
+                <th scope="col">Utilisateur</th>
+                <th scope="col">Date</th>
             </tr>
             </thead>
             <tbody>
             {% for classement in classements %}
                 <tr>
-                    <td>{{ classement.score }}</td>
-                    <td>{{ classement.user }}</td>
+                    <td>{{ classement.score }}/20</td>
+                    <td><a href="{{ path('app_profil_index',{'id':classement.user.id}) }}">{{ classement.user }}</a></td>
                     <td>{{ classement.date | date('d/m/Y')  }}</td>
                 </tr>
             {% endfor %}
