@@ -8,14 +8,16 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
               integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
               crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-primary" id="navbar">
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top" id="header">
     <div class="container">
-        <h1 class="text-light">bon.jour <i class="fas fa-mug-hot"></i></h1>
+        <h1 class="text-light">dev.book <i class="fas fa-mug-hot"></i></h1>
         <ul class="navbar-nav">
 
             {% if app.user is null %} {#Si l'utilisateur n'est pas connecté#}
@@ -31,7 +33,12 @@
     </div>
 </nav>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-warning">
+<nav class="navbar navbar-expand-md navbar-dark bg-warning fixed-top" id="nav">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
     <div class="container navbar-nav">
         {% if app.user is not null %}
         <a class="navbar-brand" href="{{ path("app_actu_index",{'id':app.user.id}) }}">
@@ -43,31 +50,37 @@
 
                 {% if app.user is not null %} {# Si l'utilisateur est connecté #}
 
-
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_profil_index',{'id':app.user.id}) }}">
+                    <a class="navbar-brand" href="{{ path('app_profil_index',{'id':app.user.id}) }}">
                         Profil
+
                     </a>
+                </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('app_amis_index', {'id':app.user.id}) }}">
+                    <a class="navbar-brand" href="{{ path('app_amis_index', {'id':app.user.id}) }}">
                         Mes Amis
                     </a>
                 </li>
-
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        Révisions
-                    </a>
-                </li>
-            </ul>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_message_index') }}">
+                        <a class="navbar-brand" href="{{ path('app_message_index') }}">
                             Messages
                         </a>
                     </li>
-                </ul>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{{ path('app_quizz_index') }}">
+                            Quizz
+                        </a>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="navbar-brand" href="#" target="_blank">
+                        Révisions
+                    </a>
+                </li>
+
+            </ul>
 
         </div>
 
@@ -80,8 +93,7 @@
            </button>
         </form>
          <div id="searchresponse">
-             <div>5555555
-             </div>
+             <div></div>
          </div>
         {% endif %}
 
@@ -90,8 +102,9 @@
     </div>
 </nav>
 
+
 <div class="transparence py-2">
-    <div class="container">
+    <div class="container" id="container">
 
         {# Affichage des messages flash #}
         {% for type, messages in app.session.flashBag.all %}

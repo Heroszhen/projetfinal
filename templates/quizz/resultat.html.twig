@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for score in scores %}
+        {{ score.user }}
+        {{ score.score }}
+        {{ score.date }}
+    {% endfor %}
+{% endblock %}
+

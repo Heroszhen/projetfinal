@@ -4,19 +4,11 @@
 
 {% block body %}
 <h2>Fil d'actualité</h2>
-<div class="row justify-content-between">
+<div class="row justify-content-center">
 
 
-    {# COLONNE DE GAUCHE #}
 
-    <div class="col-md-3 mt-5">
-
-        Rajouter du contenu dans cette colonne
-
-    </div>
-
-
-    {# COLONNE DE DROITE #}
+    {# COLONNE CENTRALE #}
 
     {# LISTE DES PUBLICATIONS #}
 
@@ -36,6 +28,22 @@
             </a>
             <br>
             <small>{{ article.datePublication | date('d/m/Y') }} à {{ article.datePublication | date('h:i') }}</small>
+       {% for article in articles %}
+        <div class="actu rounded-lg border p-3 mb-3">
+                    <a href="/profil">
+                        <div class="vignette">
+                            {% if article.auteur.photo is null %}
+                                <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="" width="50" height="50">
+                            {% else %}
+                                <img src="{{ asset('images/' ~ article.auteur.photo) }}" alt="" width="50" height="50" class="mr-2">
+                            {% endif %}
+                        </div>
+                        {{ article.auteur.prenom }} {{ article.auteur.nom }}
+                    </a>
+                    <br>
+                    <small>{{ article.datePublication | date('d/m/Y') }} à {{ article.datePublication | date('h:i') }}</small>
+
+
             <div class="mt-2 publication">
                 <p>
                     {{ article.contenu |nl2br }}
@@ -51,12 +59,12 @@
 
             {# COMMENTAIRES #}
 
-            <div class="commentaires col-12 border-top border-dark pt-2 pb-2">
+            <div class="commentaires col-12 border-top pt-2 pb-2">
                 <div class="commenter">
                     <small><a class="showcomments btn btn-link" href="#">Commenter</a> :</small>
 
                     <form action="{{ path('app_commentaire_index',{'id':article.id}) }}" method="post" class="formcommentaire">
-                        <input type="text" name="commentaire" style="width:80%;">
+                        <input type="text" name="commentaire" style="width:80%;" class="rounded-lg">
                         <input type="hidden">
                         <button type="submit" class="btn btn-link">Publier</button>
                     </form>
@@ -89,7 +97,9 @@
                             <br>
                             <div class="text-justify row">
                                 <small class="col-12">
-                                    <span>{{ comment.contenu }}</span>
+                                    <div class="rounded-pill border border-light bg-light p-5">
+                                            <span class="">{{ comment.contenu }}</span>
+                                    </div>
                                 </small>
                             </div><br>
                         </div>

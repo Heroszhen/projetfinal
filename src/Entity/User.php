@@ -109,6 +109,11 @@ class User implements UserInterface, \Serializable
      */
     private $amisSuivi;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Resultatquizz", mappedBy="user")
+     */
+    private $resultatquizzs;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -120,6 +125,7 @@ class User implements UserInterface, \Serializable
 
         $this->amis = new ArrayCollection();
         $this->amisSuivi = new ArrayCollection();
+        $this->resultatquizzs = new ArrayCollection();
 
     }
 
@@ -567,5 +573,36 @@ class User implements UserInterface, \Serializable
             $this->email,
             $this->motdepasse
             ) = unserialize($serialized);
+    }
+
+    /**
+     * @return Collection|Resultatquizz[]
+     */
+    public function getResultatquizzs(): Collection
+    {
+        return $this->resultatquizzs;
+    }
+
+    public function addResultatquizz(Resultatquizz $resultatquizz): self
+    {
+        if (!$this->resultatquizzs->contains($resultatquizz)) {
+            $this->resultatquizzs[] = $resultatquizz;
+            $resultatquizz->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResultatquizz(Resultatquizz $resultatquizz): self
+    {
+        if ($this->resultatquizzs->contains($resultatquizz)) {
+            $this->resultatquizzs->removeElement($resultatquizz);
+            // set the owning side to null (unless already changed)
+            if ($resultatquizz->getUser() === $this) {
+                $resultatquizz->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
