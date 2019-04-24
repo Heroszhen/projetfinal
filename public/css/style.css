@@ -6,7 +6,7 @@ body{
 }
 */
 
-h1, h2, h3, h4, h5, h6, p, a, li, th, td, .btn{
+h1, h2, h3, h4, h5, h6, p, a, li, th, td, span, .btn{
     font-family: 'Rubik', sans-serif;
 }
 
@@ -20,6 +20,7 @@ h1, h2, h3, h4, h5, h6, p, a, li, th, td, .btn{
 }
 #nav{
     margin-top: 72px;
+    background-color: #C31717 !important;
 }
 
 #container{
@@ -130,7 +131,7 @@ img.zoom:hover{
     transition: 0.5s cubic-bezier(0,3,.4,1);
 }
 .imgEffets img:hover { /*quand je survol les li l'image qui bouge*/
-    z-index: 2; /* QUAND JE SURVOL l'image , il vient en dessus des auyres*/
+    z-index: 2; /* QUAND JE SURVOL l'image , il vient en dessus des autres*/
     transform: scale(2);
     box-shadow: 0 0 10px black;
     /*filter: grayscale(2) blur(20px);*/
@@ -159,11 +160,11 @@ img.zoom:hover{
     padding:10px;
 }
 
-/**************L'image agrandie : ajouté par zhen************/
+/**************L'image agrandie : ajouté par zhen et modifié par Vicken ************/
 #bigimgbody{
     position:absolute;
-    z-index:2;
-    position:fixed;
+    z-index:3;
+    margin-top: 110px;
     top:0;
     width:100%;
     height:100%;

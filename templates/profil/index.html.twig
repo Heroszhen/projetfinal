@@ -112,7 +112,7 @@
                     <br>
                     {% endif %}
                     {% for article in user.articles %}
-                        <div class="row mb-4 border pt-2 rounded-lg actu" id="article{{ article.id }}">
+                        <div class="row mb-4 border pt-2 rounded-lg actu mt-4" id="article{{ article.id }}">
                             <div class="col-6">
                                 {% if article.auteur.photo is null %}
                                     <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="" width="50" height="50">
@@ -186,9 +186,9 @@
                                             <br>
                                             <div class="text-justify row">
                                                 <small class="col-12">
-                                                    <p>
-                                                        <span>{{ comment.contenu }}</span>
-                                                    </p>
+                                                    <div class="rounded-pill border border-light bg-light p-4">
+                                                        <span class="">{{ comment.contenu }}</span>
+                                                    </div>
                                                 </small>
                                             </div><br>
                                         </div>

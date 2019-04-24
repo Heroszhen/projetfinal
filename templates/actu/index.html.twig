@@ -12,7 +12,7 @@
 
     {# LISTE DES PUBLICATIONS #}
 
-    <div class="col-md-7 mt-5">
+    <div class="col-md-9 mt-5">
        {% for article in articles %}
         <div class="actu rounded-lg border p-3 mb-3">
                     <a href="/profil">
@@ -82,9 +82,9 @@
                             <br>
                             <div class="text-justify row">
                                 <small class="col-12">
-                                    <p>
-                                        <span class="">{{ comment.contenu }}</span>
-                                    </p>
+                                    <div class="rounded-pill border border-light bg-light p-5">
+                                            <span class="">{{ comment.contenu }}</span>
+                                    </div>
                                 </small>
                             </div><br>
                         </div>
