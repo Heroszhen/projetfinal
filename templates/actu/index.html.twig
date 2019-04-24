@@ -13,7 +13,7 @@
     {# LISTE DES PUBLICATIONS #}
 
     <div class="col-md-9 mt-5">
-       {% for article in articles %}
+        {% for article in articles %}
         <div class="actu rounded-lg border p-3 mb-3">
                     <a href="{{ path("app_profil_index",{'id':article.auteur.id}) }}">
                         <div class="vignette">

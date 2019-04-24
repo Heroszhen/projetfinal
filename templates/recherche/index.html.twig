@@ -10,11 +10,18 @@
             {% for user in users %}
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <a href="{{ path('app_profil_index',{'id':user.id}) }}"><img src="{{ asset('images/' ~ user.photo) }}" alt="" width="100"></a>
+                        <a href="{{ path('app_profil_index',{'id':user.id}) }}">
+                            {% if user.photo is null %}
+                                <img src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg" alt="" width="100">
+                            {% else %}
+                            <img src="{{ asset('images/' ~ user.photo) }}" alt="" width="100">
+                            {% endif %}
+                        </a>
                         <a href="{{ path('app_profil_index', {'id': user.id}) }}"
-                           class="" style="font-size: large">
+                           class="mx-5" style="font-size: large">
                             {{ user.prenom }} {{ user.nom }}
-                        </a><br>
+                        </a>
+                        <br>
                     </li>
                 </ul>
             {% else %}
