@@ -22,12 +22,21 @@ h1, h2, h3, h4, h5, h6, p, a, li, th, td, span, .btn{
     margin-top: 72px;
     background-color: #C31717 !important;
 }
+
 .navbar-brand{
     margin-right: 20px;
+    border: #C31717 1px solid;
+    padding: 10px;
+}
+a.navbar-brand:hover{
+    font-weight: bold !important;
+    color: yellow !important;
+    border: black 1px solid;
+    border-radius: 20px;
 }
 
 #container{
-    margin-top: 130px;
+    margin-top: 140px;
 }
 
 .bg-primary{

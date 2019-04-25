@@ -50,8 +50,8 @@
 
                 {% if app.user is not null %} {# Si l'utilisateur est connecté #}
 
-                <li class="nav-item">
-                    <a class="navbar-brand" href="{{ path('app_profil_index',{'id':app.user.id}) }}">
+                <li class="nav-item text-center">
+                    <a class="navbar-brand text-center" href="{{ path('app_profil_index',{'id':app.user.id}) }}">
                         Profil
 
                     </a>

@@ -3,10 +3,10 @@
 
             <a href="{{ path('app_profil_index',{'id':message.auteur.id}) }}" class="h5">{{ message.auteur }}</a>
             ({{ message.datePublication|date('d/m/Y H:i:s') }}) :
-
-            <p class="text-justify">
+            <br>
+            <span class="text-justify">
                 {{ message.contenu|nl2br }}
-            </p>
+            </span>
         </div>
 {% endfor %}
 
